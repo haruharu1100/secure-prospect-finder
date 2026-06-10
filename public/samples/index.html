@@ -3,28 +3,38 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Web導線ラボ｜予約・問い合わせにつながるLP/HP制作</title>
-  <meta name="description" content="小規模店舗・個人事業主向けに、GoogleマップやSNSから来た人を予約・問い合わせにつなげるLP/HPを制作します。無料Web導線診断受付中。">
+  <title>株式会社MORIKA｜24時間限定 LP半額5万円制作</title>
+  <meta name="description" content="株式会社MORIKAは小規模店舗・個人事業主向けに、予約・問い合わせにつながるLP/HPを制作します。24時間限定でLP制作を半額5万円で受付中。">
   <style>
     * { box-sizing: border-box; }
     body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", sans-serif; background: #f6f7f9; color: #17202a; }
     a { color: inherit; }
     .inner { width: min(1120px, 100%); margin: 0 auto; }
-    header {
-      min-height: 88vh;
-      display: grid;
-      align-items: center;
-      padding: 34px 22px 72px;
-      background:
-        linear-gradient(90deg, rgba(7, 31, 59, .98) 0%, rgba(7, 31, 59, .9) 48%, rgba(7, 31, 59, .45) 100%),
-        url("../social-assets/x-header-1500x500.png") center/cover;
-      color: white;
-    }
-    nav {
+    .countdown-bar {
       position: sticky;
       top: 0;
-      z-index: 2;
-      background: rgba(255,255,255,.94);
+      z-index: 5;
+      background: #071f3b;
+      color: white;
+      border-bottom: 4px solid #f28c28;
+      padding: 10px 18px;
+      text-align: center;
+      font-weight: 950;
+    }
+    .countdown-bar span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 126px;
+      margin-left: 10px;
+      padding: 7px 12px;
+      border-radius: 6px;
+      background: #f28c28;
+      color: #071f3b;
+      font-variant-numeric: tabular-nums;
+    }
+    nav {
+      background: rgba(255,255,255,.96);
       border-bottom: 1px solid #d9dee7;
       backdrop-filter: blur(10px);
     }
@@ -35,7 +45,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 42px;
+      min-height: 44px;
       padding: 10px 16px;
       border-radius: 6px;
       text-decoration: none;
@@ -43,13 +53,37 @@
     }
     .nav-links a { background: #edf2f7; color: #102a43; }
     .cta { background: #f28c28; color: #071f3b; }
+    .cta.green { background: #35c759; color: white; }
+    .cta.blue { background: #1f4f9a; color: white; }
+    .cta.dark { background: #102a43; color: white; }
     .cta.secondary { background: white; color: #102a43; }
+    header {
+      min-height: 86vh;
+      display: grid;
+      align-items: center;
+      padding: 56px 22px 72px;
+      background:
+        linear-gradient(90deg, rgba(7, 31, 59, .98) 0%, rgba(7, 31, 59, .9) 48%, rgba(7, 31, 59, .45) 100%),
+        url("../social-assets/x-header-1500x500.png") center/cover;
+      color: white;
+    }
     .eyebrow { display: inline-block; padding: 7px 12px; border-radius: 999px; background: rgba(20,108,95,.92); font-weight: 950; margin-bottom: 18px; }
-    h1 { font-size: clamp(38px, 8vw, 82px); line-height: 1.02; margin: 0 0 18px; letter-spacing: 0; max-width: 880px; }
+    h1 { font-size: clamp(38px, 8vw, 84px); line-height: 1.02; margin: 0 0 18px; letter-spacing: 0; max-width: 930px; }
     h2 { font-size: clamp(26px, 4vw, 44px); line-height: 1.16; margin: 0 0 14px; letter-spacing: 0; }
     h3 { margin: 0 0 8px; font-size: 21px; }
     p { line-height: 1.8; font-size: 16px; }
-    .lead { max-width: 760px; font-size: 19px; color: rgba(255,255,255,.94); }
+    .lead { max-width: 790px; font-size: 19px; color: rgba(255,255,255,.94); }
+    .offer-box {
+      display: inline-grid;
+      gap: 4px;
+      margin: 22px 0 0;
+      padding: 16px 20px;
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 8px;
+      background: rgba(255,255,255,.1);
+      backdrop-filter: blur(8px);
+    }
+    .offer-box strong { color: #f28c28; font-size: clamp(34px, 6vw, 58px); line-height: 1; }
     .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 24px; }
     section { padding: 64px 22px; }
     .band { background: white; }
@@ -69,32 +103,43 @@
     img { width: 100%; aspect-ratio: 16/10; object-fit: cover; display: block; }
     .body { padding: 18px; }
     .tag { display: inline-block; background: #eaf1ee; color: #146c5f; border-radius: 999px; padding: 5px 9px; font-size: 12px; font-weight: 900; margin-bottom: 10px; }
-    .price { font-size: 34px; color: #146c5f; font-weight: 950; margin: 6px 0; }
+    .price { font-size: 36px; color: #146c5f; font-weight: 950; margin: 6px 0; }
+    .strike { color: #667085; text-decoration: line-through; font-weight: 700; }
     .contact {
       background: #102a43;
       color: white;
       text-align: center;
     }
-    .contact .inner { width: min(860px, 100%); }
-    .contact-buttons { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 24px; }
-    .contact-buttons a { min-height: 54px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; background: white; color: #102a43; text-decoration: none; font-weight: 950; }
-    .contact-buttons a.primary { background: #f28c28; color: #071f3b; }
+    .contact .inner { width: min(920px, 100%); }
+    .contact-buttons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 24px; }
+    .contact-buttons a { min-height: 58px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; background: white; color: #102a43; text-decoration: none; font-weight: 950; }
+    .contact-buttons a.green { background: #35c759; color: white; }
+    .contact-buttons a.dark { background: #071f3b; color: white; border: 1px solid rgba(255,255,255,.18); }
+    .contact-buttons a.blue { background: #1f4f9a; color: white; }
+    .mail { margin-top: 18px; color: rgba(255,255,255,.86); font-weight: 800; }
+    .mail a { color: white; text-decoration: underline; text-underline-offset: 4px; }
     footer { padding: 22px; background: #071f3b; color: rgba(255,255,255,.72); text-align: center; }
     @media (max-width: 900px) {
-      header { min-height: auto; padding-top: 70px; }
+      header { min-height: auto; padding-top: 50px; }
       .grid, .grid2, .contact-buttons { grid-template-columns: 1fr; }
       .nav-inner { align-items: flex-start; flex-direction: column; }
+      .countdown-bar span { display: flex; margin: 8px auto 0; width: max-content; }
     }
   </style>
 </head>
 <body>
+  <div class="countdown-bar">
+    24時間限定 LP制作 半額キャンペーン終了まで
+    <span id="countdown">24:00:00</span>
+  </div>
+
   <nav>
     <div class="nav-inner">
-      <div class="brand">Web導線ラボ</div>
+      <div class="brand">株式会社MORIKA</div>
       <div class="nav-links">
         <a href="#samples">サンプル</a>
-        <a href="#plan">料金目安</a>
-        <a href="#contact">無料診断</a>
+        <a href="#plan">料金</a>
+        <a href="#contact">相談する</a>
       </div>
     </div>
   </nav>
@@ -102,11 +147,17 @@
   <header>
     <div class="inner">
       <span class="eyebrow">小規模店舗・個人事業主向け</span>
-      <h1>予約・問い合わせにつながるLP/HPを作ります。</h1>
-      <p class="lead">GoogleマップやSNSから来た人が「料金・場所・予約方法」で迷わないWeb導線を整えます。まずは無料で、今の導線で改善できるポイントを3つに絞って診断します。</p>
+      <h1>予約・問い合わせにつながるLPを、24時間限定5万円で制作。</h1>
+      <p class="lead">GoogleマップやSNSから来た人が「料金・場所・予約方法」で迷わないWeb導線を整えます。まずは無料相談で、今の導線で改善できるポイントを確認します。</p>
+      <div class="offer-box">
+        <span><span class="strike">通常10万円</span> のLP制作を</span>
+        <strong>半額 5万円</strong>
+        <span>スマホ対応・文章構成・問い合わせ導線込み</span>
+      </div>
       <div class="actions">
-        <a class="cta" href="#contact">無料診断を相談する</a>
-        <a class="cta secondary" href="#samples">業種別サンプルを見る</a>
+        <a class="cta green" href="https://line.me/R/ti/p/@015vzsdb" target="_blank" rel="noopener">LINEで無料相談する</a>
+        <a class="cta dark" href="https://calendly.com/morika-work/30min" target="_blank" rel="noopener">30分相談を予約</a>
+        <a class="cta blue" href="tel:07033403552">電話 070-3340-3552</a>
       </div>
     </div>
   </header>
@@ -114,12 +165,12 @@
   <section class="band">
     <div class="inner grid2">
       <div class="info-card">
-        <h2>何をしているのか</h2>
-        <p>LP/HP制作、Googleマップ改善、SNSからの問い合わせ導線づくりを行っています。見た目だけでなく、初めて見る人が予約・問い合わせまで進める構成を作ります。</p>
+        <h2>株式会社MORIKAができること</h2>
+        <p>LP/HP制作、Googleマップ改善、SNSからの問い合わせ導線づくりを行います。見た目だけでなく、初めて見る人が予約・問い合わせまで進める構成を作ります。</p>
       </div>
       <div class="info-card">
-        <h2>無料診断で見ること</h2>
-        <p>料金が見えるか、予約導線が分かりやすいか、Googleマップ/SNSから来た人が離脱しやすい場所はどこかを確認します。</p>
+        <h2>5万円制作に含まれるもの</h2>
+        <p>1枚LP、スマホ対応、文章構成、料金・場所・予約導線、公開サポート。まず見せられるページを短期間で作ります。</p>
       </div>
     </div>
   </section>
@@ -143,9 +194,9 @@
   <section class="band" id="plan">
     <div class="inner grid2">
       <div class="info-card">
-        <h2>LP制作</h2>
-        <p class="price">10万円前後</p>
-        <p>1枚構成、スマホ対応、問い合わせ導線、文章構成、公開サポート込み。</p>
+        <h2>24時間限定 LP制作</h2>
+        <p class="price">5万円</p>
+        <p><span class="strike">通常10万円</span>。1枚構成、スマホ対応、問い合わせ導線、文章構成、公開サポート込み。</p>
       </div>
       <div class="info-card">
         <h2>Googleマップ改善</h2>
@@ -157,18 +208,43 @@
 
   <section class="contact" id="contact">
     <div class="inner">
-      <h2>無料Web導線診断を受付中</h2>
-      <p>「今のサイトやSNSから、どこを直せば問い合わせにつながりやすいか」を3つに絞ってお送りします。まずはInstagramまたはXのDMからご相談ください。</p>
+      <h2>無料相談・制作依頼はこちら</h2>
+      <p>LPを作るべきか、HPが必要か、今の導線を見て相談できます。まずは一番使いやすい方法でご連絡ください。</p>
       <div class="contact-buttons">
-        <a class="primary" href="https://www.instagram.com/web_dousen_lab/" target="_blank" rel="noopener">Instagramで相談</a>
-        <a href="https://x.com/web_dousen_lab" target="_blank" rel="noopener">Xで相談</a>
-        <a href="#samples">サンプルを見る</a>
+        <a class="green" href="https://line.me/R/ti/p/@015vzsdb" target="_blank" rel="noopener">LINEで無料相談する</a>
+        <a class="dark" href="https://calendly.com/morika-work/30min" target="_blank" rel="noopener">30分相談を予約</a>
+        <a class="blue" href="tel:07033403552">電話 070-3340-3552</a>
+        <a href="mailto:info@morika.work">メール相談</a>
       </div>
+      <p class="mail">メール相談: <a href="mailto:info@morika.work">info@morika.work</a></p>
     </div>
   </section>
 
   <footer>
-    Web導線ラボ｜小規模店舗・個人事業主向けLP/HP制作
+    株式会社MORIKA｜LP/HP制作・Web導線改善
   </footer>
+
+  <script>
+    const countdownEl = document.getElementById("countdown");
+    const key = "morika_lp_offer_deadline";
+    const dayMs = 24 * 60 * 60 * 1000;
+    let deadline = Number(localStorage.getItem(key));
+    const now = Date.now();
+    if (!deadline || deadline <= now) {
+      deadline = now + dayMs;
+      localStorage.setItem(key, String(deadline));
+    }
+
+    function tick() {
+      const remain = Math.max(0, deadline - Date.now());
+      const hours = Math.floor(remain / 3600000);
+      const minutes = Math.floor((remain % 3600000) / 60000);
+      const seconds = Math.floor((remain % 60000) / 1000);
+      countdownEl.textContent = [hours, minutes, seconds].map((v) => String(v).padStart(2, "0")).join(":");
+    }
+
+    tick();
+    setInterval(tick, 1000);
+  </script>
 </body>
 </html>
