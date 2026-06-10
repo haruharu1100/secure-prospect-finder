@@ -52,7 +52,11 @@ function serveFile(res, filePath, options = {}) {
 const server = http.createServer((req, res) => {
   const urlPath = new URL(req.url, `http://${req.headers.host}`).pathname;
   const safePath = path.normalize(urlPath).replace(/^(\.\.[/\\])+/, "");
-  const filePath = safePath === "/" ? path.join(publicDir, "index.html") : path.join(publicDir, safePath);
+  const filePath = safePath === "/"
+    ? path.join(publicDir, "index.html")
+    : safePath.endsWith("/")
+      ? path.join(publicDir, safePath, "index.html")
+      : path.join(publicDir, safePath);
 
   if (!filePath.startsWith(publicDir)) {
     res.writeHead(403, { "Content-Type": "text/plain; charset=utf-8" });
