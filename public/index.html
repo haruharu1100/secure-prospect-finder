@@ -357,43 +357,6 @@
       min-height: 32px;
     }
 
-    .contact-grid {
-      display: grid;
-      gap: 6px;
-      min-width: 240px;
-    }
-
-    .contact-grid input {
-      padding: 7px 8px;
-      font-size: 12px;
-    }
-
-    .contact-actions {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 6px;
-    }
-
-    .contact-actions a {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 30px;
-      padding: 6px 8px;
-      border-radius: 6px;
-      background: #314155;
-      color: white;
-      text-decoration: none;
-      font-size: 12px;
-      font-weight: 850;
-    }
-
-    .contact-actions a.missing {
-      background: #edf1f7;
-      color: #667085;
-      pointer-events: none;
-    }
-
     .empty {
       background: white;
       border: 1px dashed #abb6c5;
@@ -1098,21 +1061,9 @@
             <div class="hint">評価 ${p.rating || "-"} / 口コミ ${p.reviews || 0}</div>
           </td>
           <td>
-            <div class="contact-grid">
-              <input data-action="instagram" data-id="${p.id}" value="${escapeHtml(p.instagram || "")}" placeholder="Instagram URL">
-              <input data-action="xUrl" data-id="${p.id}" value="${escapeHtml(p.xUrl || "")}" placeholder="X URL">
-              <input data-action="officialUrl" data-id="${p.id}" value="${escapeHtml(p.officialUrl || p.website || "")}" placeholder="公式サイト URL">
-              <input data-action="officialLine" data-id="${p.id}" value="${escapeHtml(p.officialLine || "")}" placeholder="公式LINE URL">
-              <input data-action="phone" data-id="${p.id}" value="${escapeHtml(p.phone || "")}" placeholder="電話番号">
-              <div class="contact-actions">
-                ${contactLink("Instagram", p.instagram)}
-                ${contactLink("X", p.xUrl)}
-                ${contactLink("公式", p.officialUrl || p.website)}
-                ${contactLink("LINE", p.officialLine)}
-                ${contactLink("電話", phoneUrl(p.phone))}
-              </div>
-              ${p.mapsUrl ? `<a href="${escapeAttr(p.mapsUrl)}" target="_blank" rel="noopener">Googleマップ</a>` : ""}
-            </div>
+            ${p.phone ? `<div>${escapeHtml(p.phone)}</div>` : ""}
+            ${p.website ? `<div><a href="${escapeAttr(p.website)}" target="_blank" rel="noopener">Webサイト</a></div>` : `<span class="tag bad">Web未確認</span>`}
+            ${p.mapsUrl ? `<div><a href="${escapeAttr(p.mapsUrl)}" target="_blank" rel="noopener">Googleマップ</a></div>` : ""}
           </td>
           <td>
             <select data-action="status" data-id="${p.id}">
@@ -1138,12 +1089,6 @@
       el("hotStat").textContent = prospects.filter((p) => priority(p.score) === "hot").length;
       el("newStat").textContent = prospects.filter((p) => p.status === "未連絡").length;
       el("dealStat").textContent = prospects.filter((p) => p.status === "商談化").length;
-    }
-
-    function contactLink(label, href) {
-      const url = String(href || "").startsWith("tel:") ? href : normalizeUrl(href);
-      if (!url) return `<a class="missing" href="#">${label}</a>`;
-      return `<a href="${escapeAttr(url)}" target="_blank" rel="noopener">${label}</a>`;
     }
 
     function updateProspect(id, patch) {
@@ -1466,11 +1411,6 @@ ${absoluteSampleUrl(sample.path)}
       if (!id) return;
       if (target.dataset.action === "status") updateProspect(id, { status: target.value });
       if (target.dataset.action === "memo") updateProspect(id, { memo: target.value });
-      if (target.dataset.action === "instagram") updateProspect(id, { instagram: normalizeUrl(target.value) });
-      if (target.dataset.action === "xUrl") updateProspect(id, { xUrl: normalizeUrl(target.value) });
-      if (target.dataset.action === "officialUrl") updateProspect(id, { officialUrl: normalizeUrl(target.value), website: normalizeUrl(target.value) });
-      if (target.dataset.action === "officialLine") updateProspect(id, { officialLine: normalizeUrl(target.value) });
-      if (target.dataset.action === "phone") updateProspect(id, { phone: target.value.trim() });
     });
 
     el("list").addEventListener("click", (event) => {

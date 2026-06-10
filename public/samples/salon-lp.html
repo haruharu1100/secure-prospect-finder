@@ -32,8 +32,13 @@
     .card span { display: inline-block; font-weight: 900; color: #b9475e; margin-bottom: 8px; }
     .price { font-size: 32px; font-weight: 950; color: #b9475e; margin: 8px 0; }
     .voice { border-left: 5px solid #b9475e; padding-left: 16px; }
+    .contact-footer { padding: 56px 24px 80px; background: #211f25; color: white; text-align: center; }
+    .contact-footer h2 { color: white; }
+    .contact-buttons { width: min(760px, 100%); margin: 22px auto 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .contact-buttons a { display: inline-flex; align-items: center; justify-content: center; min-height: 50px; border-radius: 6px; background: white; color: #211f25; text-decoration: none; font-weight: 900; }
+    .contact-buttons a.primary { background: #b9475e; color: white; }
     .fixed-cta { position: sticky; bottom: 0; z-index: 4; display: flex; justify-content: center; gap: 10px; padding: 10px; background: rgba(255,250,247,.94); border-top: 1px solid #eadbd5; }
-    @media (max-width: 820px) { nav { padding: 10px 14px; } .split, .grid3 { grid-template-columns: 1fr; } section { padding: 50px 18px; } .fixed-cta { align-items: stretch; flex-direction: column; } }
+    @media (max-width: 820px) { nav { padding: 10px 14px; } .split, .grid3, .contact-buttons { grid-template-columns: 1fr; } section { padding: 50px 18px; } .fixed-cta { align-items: stretch; flex-direction: column; } }
   </style>
 </head>
 <body>
@@ -82,6 +87,16 @@
       <div class="card"><h3>よくある質問</h3><p>当日予約はできますか？ / 駐車場はありますか？ / 支払い方法は？ / 初回は何分かかりますか？</p></div>
     </div>
   </section>
+  <footer class="contact-footer">
+    <h2>予約・お問い合わせ</h2>
+    <p>Instagram、X、公式サイト、電話へすぐ移動できる導線をページ下部にまとめます。</p>
+    <div class="contact-buttons">
+      <a class="primary" href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://x.com/" target="_blank" rel="noopener">X</a>
+      <a href="#" target="_blank" rel="noopener">公式サイト</a>
+      <a href="tel:0000000000">電話</a>
+    </div>
+  </footer>
   <div class="fixed-cta"><a class="cta" href="#reserve">LINE予約</a><a class="cta secondary" href="#menu">料金を見る</a></div>
 </body>
 </html>

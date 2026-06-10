@@ -31,7 +31,12 @@
     .price { font-size: 34px; color: #146c5f; font-weight: 950; margin: 8px 0; }
     .split { display: grid; grid-template-columns: .95fr 1.05fr; gap: 34px; align-items: center; }
     img { width: 100%; border-radius: 8px; aspect-ratio: 4/3; object-fit: cover; }
-    @media (max-width: 880px) { .grid4, .grid3, .split { grid-template-columns: 1fr; } section { padding: 50px 18px; } nav { padding: 10px 14px; } }
+    .contact-footer { padding: 56px 24px; background: #13202f; color: white; text-align: center; }
+    .contact-footer h2 { color: white; }
+    .contact-buttons { width: min(760px, 100%); margin: 22px auto 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .contact-buttons a { display: inline-flex; align-items: center; justify-content: center; min-height: 50px; border-radius: 6px; background: white; color: #13202f; text-decoration: none; font-weight: 900; }
+    .contact-buttons a.primary { background: #146c5f; color: white; }
+    @media (max-width: 880px) { .grid4, .grid3, .split, .contact-buttons { grid-template-columns: 1fr; } section { padding: 50px 18px; } nav { padding: 10px 14px; } }
   </style>
 </head>
 <body>
@@ -72,5 +77,15 @@
       <div class="card"><h3>FAQ</h3><p>保険、服装、予約変更、子連れ可否などを掲載。</p></div>
     </div>
   </section>
+  <footer class="contact-footer">
+    <h2>予約・お問い合わせ</h2>
+    <p>Instagram、X、公式サイト、電話を押しやすく配置し、初回予約への迷いを減らします。</p>
+    <div class="contact-buttons">
+      <a class="primary" href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://x.com/" target="_blank" rel="noopener">X</a>
+      <a href="#" target="_blank" rel="noopener">公式サイト</a>
+      <a href="tel:0000000000">電話</a>
+    </div>
+  </footer>
 </body>
 </html>
