@@ -3,39 +3,172 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>業種別LP/HPサンプル集</title>
+  <title>Web導線ラボ｜予約・問い合わせにつながるLP/HP制作</title>
+  <meta name="description" content="小規模店舗・個人事業主向けに、GoogleマップやSNSから来た人を予約・問い合わせにつなげるLP/HPを制作します。無料Web導線診断受付中。">
   <style>
     * { box-sizing: border-box; }
     body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", sans-serif; background: #f6f7f9; color: #17202a; }
-    header { padding: 48px 22px; background: #102a43; color: white; }
+    a { color: inherit; }
     .inner { width: min(1120px, 100%); margin: 0 auto; }
-    h1 { font-size: clamp(34px, 7vw, 72px); line-height: 1.02; margin: 0 0 12px; letter-spacing: 0; }
-    p { line-height: 1.75; font-size: 16px; }
-    main { padding: 32px 22px; }
+    header {
+      min-height: 88vh;
+      display: grid;
+      align-items: center;
+      padding: 34px 22px 72px;
+      background:
+        linear-gradient(90deg, rgba(7, 31, 59, .98) 0%, rgba(7, 31, 59, .9) 48%, rgba(7, 31, 59, .45) 100%),
+        url("../social-assets/x-header-1500x500.png") center/cover;
+      color: white;
+    }
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      background: rgba(255,255,255,.94);
+      border-bottom: 1px solid #d9dee7;
+      backdrop-filter: blur(10px);
+    }
+    .nav-inner { width: min(1120px, 100%); margin: 0 auto; padding: 12px 22px; display: flex; justify-content: space-between; align-items: center; gap: 14px; }
+    .brand { font-weight: 950; color: #102a43; }
+    .nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+    .nav-links a, .cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 10px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 900;
+    }
+    .nav-links a { background: #edf2f7; color: #102a43; }
+    .cta { background: #f28c28; color: #071f3b; }
+    .cta.secondary { background: white; color: #102a43; }
+    .eyebrow { display: inline-block; padding: 7px 12px; border-radius: 999px; background: rgba(20,108,95,.92); font-weight: 950; margin-bottom: 18px; }
+    h1 { font-size: clamp(38px, 8vw, 82px); line-height: 1.02; margin: 0 0 18px; letter-spacing: 0; max-width: 880px; }
+    h2 { font-size: clamp(26px, 4vw, 44px); line-height: 1.16; margin: 0 0 14px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 21px; }
+    p { line-height: 1.8; font-size: 16px; }
+    .lead { max-width: 760px; font-size: 19px; color: rgba(255,255,255,.94); }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 24px; }
+    section { padding: 64px 22px; }
+    .band { background: white; }
     .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    a.card { display: block; color: inherit; text-decoration: none; background: white; border: 1px solid #d9dee7; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 28px rgba(16,24,40,.08); }
+    .grid2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    a.card, .info-card {
+      display: block;
+      color: inherit;
+      text-decoration: none;
+      background: white;
+      border: 1px solid #d9dee7;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 10px 28px rgba(16,24,40,.08);
+    }
+    .info-card { padding: 24px; }
     img { width: 100%; aspect-ratio: 16/10; object-fit: cover; display: block; }
     .body { padding: 18px; }
     .tag { display: inline-block; background: #eaf1ee; color: #146c5f; border-radius: 999px; padding: 5px 9px; font-size: 12px; font-weight: 900; margin-bottom: 10px; }
-    h2 { margin: 0 0 8px; font-size: 21px; }
-    @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+    .price { font-size: 34px; color: #146c5f; font-weight: 950; margin: 6px 0; }
+    .contact {
+      background: #102a43;
+      color: white;
+      text-align: center;
+    }
+    .contact .inner { width: min(860px, 100%); }
+    .contact-buttons { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 24px; }
+    .contact-buttons a { min-height: 54px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; background: white; color: #102a43; text-decoration: none; font-weight: 950; }
+    .contact-buttons a.primary { background: #f28c28; color: #071f3b; }
+    footer { padding: 22px; background: #071f3b; color: rgba(255,255,255,.72); text-align: center; }
+    @media (max-width: 900px) {
+      header { min-height: auto; padding-top: 70px; }
+      .grid, .grid2, .contact-buttons { grid-template-columns: 1fr; }
+      .nav-inner { align-items: flex-start; flex-direction: column; }
+    }
   </style>
 </head>
 <body>
+  <nav>
+    <div class="nav-inner">
+      <div class="brand">Web導線ラボ</div>
+      <div class="nav-links">
+        <a href="#samples">サンプル</a>
+        <a href="#plan">料金目安</a>
+        <a href="#contact">無料診断</a>
+      </div>
+    </div>
+  </nav>
+
   <header>
     <div class="inner">
-      <h1>業種別LP/HPサンプル集</h1>
-      <p>営業DMで送るためのサンプルページです。相手の業種に近いものを送り、完成イメージを先に見せます。</p>
+      <span class="eyebrow">小規模店舗・個人事業主向け</span>
+      <h1>予約・問い合わせにつながるLP/HPを作ります。</h1>
+      <p class="lead">GoogleマップやSNSから来た人が「料金・場所・予約方法」で迷わないWeb導線を整えます。まずは無料で、今の導線で改善できるポイントを3つに絞って診断します。</p>
+      <div class="actions">
+        <a class="cta" href="#contact">無料診断を相談する</a>
+        <a class="cta secondary" href="#samples">業種別サンプルを見る</a>
+      </div>
     </div>
   </header>
-  <main>
-    <div class="inner grid">
-      <a class="card" href="salon-lp.html"><img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=900&q=80" alt=""><div class="body"><span class="tag">LP</span><h2>サロン向け</h2><p>美容室、ネイル、エステ向けの予約LP。</p></div></a>
-      <a class="card" href="clinic-lp.html"><img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=900&q=80" alt=""><div class="body"><span class="tag">LP</span><h2>整体・治療院向け</h2><p>初回予約につなげる不安解消LP。</p></div></a>
-      <a class="card" href="restaurant-lp.html"><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80" alt=""><div class="body"><span class="tag">LP</span><h2>飲食店向け</h2><p>写真とメニューで来店につなげるLP。</p></div></a>
-      <a class="card" href="professional-hp.html"><img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=900&q=80" alt=""><div class="body"><span class="tag">HP</span><h2>士業向け</h2><p>信頼、料金、相談導線を整えるHP。</p></div></a>
-      <a class="card" href="home-service-hp.html"><img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=900&q=80" alt=""><div class="body"><span class="tag">HP</span><h2>住宅サービス向け</h2><p>施工事例から見積もりへつなげるHP。</p></div></a>
+
+  <section class="band">
+    <div class="inner grid2">
+      <div class="info-card">
+        <h2>何をしているのか</h2>
+        <p>LP/HP制作、Googleマップ改善、SNSからの問い合わせ導線づくりを行っています。見た目だけでなく、初めて見る人が予約・問い合わせまで進める構成を作ります。</p>
+      </div>
+      <div class="info-card">
+        <h2>無料診断で見ること</h2>
+        <p>料金が見えるか、予約導線が分かりやすいか、Googleマップ/SNSから来た人が離脱しやすい場所はどこかを確認します。</p>
+      </div>
     </div>
+  </section>
+
+  <main id="samples">
+    <section>
+      <div class="inner">
+        <h2>業種別LP/HPサンプル</h2>
+        <p>近い業種のサンプルを見ると、完成イメージが分かります。</p>
+        <div class="grid">
+          <a class="card" href="salon-lp.html"><img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=900&q=80" alt=""><div class="body"><span class="tag">LP</span><h3>サロン向け</h3><p>美容室、ネイル、エステ向けの予約LP。</p></div></a>
+          <a class="card" href="clinic-lp.html"><img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=900&q=80" alt=""><div class="body"><span class="tag">LP</span><h3>整体・治療院向け</h3><p>初回予約につなげる不安解消LP。</p></div></a>
+          <a class="card" href="restaurant-lp.html"><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80" alt=""><div class="body"><span class="tag">LP</span><h3>飲食店向け</h3><p>写真とメニューで来店につなげるLP。</p></div></a>
+          <a class="card" href="professional-hp.html"><img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=900&q=80" alt=""><div class="body"><span class="tag">HP</span><h3>士業向け</h3><p>信頼、料金、相談導線を整えるHP。</p></div></a>
+          <a class="card" href="home-service-hp.html"><img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=900&q=80" alt=""><div class="body"><span class="tag">HP</span><h3>住宅サービス向け</h3><p>施工事例から見積もりへつなげるHP。</p></div></a>
+        </div>
+      </div>
+    </section>
   </main>
+
+  <section class="band" id="plan">
+    <div class="inner grid2">
+      <div class="info-card">
+        <h2>LP制作</h2>
+        <p class="price">10万円前後</p>
+        <p>1枚構成、スマホ対応、問い合わせ導線、文章構成、公開サポート込み。</p>
+      </div>
+      <div class="info-card">
+        <h2>Googleマップ改善</h2>
+        <p class="price">月1万円から</p>
+        <p>プロフィール整備、写真・投稿改善、口コミ返信、自然な口コミ依頼導線を整えます。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="inner">
+      <h2>無料Web導線診断を受付中</h2>
+      <p>「今のサイトやSNSから、どこを直せば問い合わせにつながりやすいか」を3つに絞ってお送りします。まずはInstagramまたはXのDMからご相談ください。</p>
+      <div class="contact-buttons">
+        <a class="primary" href="https://www.instagram.com/web_dousen_lab/" target="_blank" rel="noopener">Instagramで相談</a>
+        <a href="https://x.com/web_dousen_lab" target="_blank" rel="noopener">Xで相談</a>
+        <a href="#samples">サンプルを見る</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Web導線ラボ｜小規模店舗・個人事業主向けLP/HP制作
+  </footer>
 </body>
 </html>
