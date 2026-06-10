@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: secure-prospect-finder
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: BASIC_AUTH_USER
+        value: admin
+      - key: BASIC_AUTH_PASSWORD
+        sync: false

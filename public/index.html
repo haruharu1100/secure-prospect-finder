@@ -1,0 +1,1485 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Web制作 見込み客ファインダー</title>
+  <style>
+    :root {
+      --bg: #f6f7f9;
+      --panel: #ffffff;
+      --text: #17202a;
+      --muted: #667085;
+      --line: #d9dee7;
+      --accent: #146c5f;
+      --accent-2: #e46f2e;
+      --accent-3: #305d9f;
+      --danger: #b42318;
+      --ok: #057a55;
+      --shadow: 0 10px 28px rgba(16, 24, 40, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Yu Gothic", sans-serif;
+      line-height: 1.55;
+    }
+
+    header {
+      background: #102a43;
+      color: white;
+      padding: 24px;
+      border-bottom: 5px solid var(--accent-2);
+    }
+
+    header h1 {
+      margin: 0 0 6px;
+      font-size: clamp(24px, 4vw, 38px);
+      letter-spacing: 0;
+    }
+
+    header p {
+      margin: 0;
+      color: #dbe7f3;
+      max-width: 920px;
+    }
+
+    main {
+      width: min(1380px, 100%);
+      margin: 0 auto;
+      padding: 18px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .panel h2 {
+      margin: 0;
+      padding: 16px;
+      font-size: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .panel-body { padding: 16px; }
+
+    label {
+      display: block;
+      font-weight: 700;
+      font-size: 13px;
+      margin: 12px 0 6px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      border: 1px solid #c8d0dc;
+      border-radius: 6px;
+      padding: 10px 11px;
+      font: inherit;
+      background: white;
+      color: var(--text);
+    }
+
+    textarea { min-height: 88px; resize: vertical; }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    button, .link-button {
+      border: 0;
+      border-radius: 6px;
+      padding: 10px 13px;
+      background: var(--accent);
+      color: white;
+      font-weight: 800;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+    }
+
+    button.secondary, .link-button.secondary { background: #314155; }
+    button.orange { background: var(--accent-2); }
+    button.ghost {
+      background: white;
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+    button.danger { background: var(--danger); }
+
+    button:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 6px;
+    }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .category-list {
+      max-height: 240px;
+      overflow: auto;
+      border: 1px solid #d7dde6;
+      border-radius: 8px;
+      padding: 8px;
+      background: #fbfcfe;
+    }
+
+    .pill {
+      border: 1px solid #b9c5d4;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12px;
+      background: #f9fbfc;
+    }
+
+    .pill input {
+      width: auto;
+      margin-right: 5px;
+    }
+
+    .pill.used {
+      background: #e8f5ef;
+      border-color: #94c9b0;
+      color: #075f45;
+    }
+
+    .usage-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 8px;
+      max-height: 170px;
+      overflow: auto;
+    }
+
+    .usage-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      align-items: center;
+      border: 1px solid #d7dde6;
+      border-radius: 8px;
+      padding: 8px 10px;
+      background: #fbfcfe;
+      font-size: 12px;
+    }
+
+    .usage-item strong {
+      display: block;
+      font-size: 13px;
+    }
+
+    .guide {
+      margin-bottom: 16px;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .guide summary {
+      cursor: pointer;
+      padding: 14px 16px;
+      font-weight: 900;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .guide-content {
+      padding: 14px 16px;
+      color: #344054;
+      font-size: 14px;
+    }
+
+    .guide-content ol {
+      margin: 8px 0 0 20px;
+      padding: 0;
+    }
+
+    .guide-content li { margin: 6px 0; }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .stat {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 26px;
+      line-height: 1.1;
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .toolbar .filters {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .toolbar input, .toolbar select {
+      width: auto;
+      min-width: 190px;
+    }
+
+    .table-wrap {
+      overflow: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 1120px;
+    }
+
+    th, td {
+      padding: 10px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+      text-align: left;
+      font-size: 13px;
+    }
+
+    th {
+      position: sticky;
+      top: 0;
+      background: #eef2f6;
+      z-index: 1;
+      white-space: nowrap;
+    }
+
+    .name {
+      font-weight: 850;
+      font-size: 14px;
+    }
+
+    .score {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 44px;
+      height: 30px;
+      border-radius: 999px;
+      background: #e9f8f3;
+      color: #045c43;
+      font-weight: 900;
+    }
+
+    .score.mid { background: #fff4e7; color: #9a4a0d; }
+    .score.low { background: #edf1f7; color: #475467; }
+
+    .tag {
+      display: inline-block;
+      padding: 3px 7px;
+      margin: 2px 3px 2px 0;
+      border-radius: 999px;
+      background: #edf2fa;
+      color: #254167;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .tag.hot { background: #e7f7ef; color: #05603a; }
+    .tag.warn { background: #fff3e0; color: #93370d; }
+    .tag.bad { background: #fee4e2; color: #912018; }
+
+    td a {
+      color: var(--accent-3);
+      font-weight: 750;
+      text-decoration: none;
+    }
+
+    td a:hover { text-decoration: underline; }
+
+    .small-actions {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 6px;
+    }
+
+    .small-actions a, .small-actions button {
+      font-size: 12px;
+      padding: 7px 8px;
+      min-height: 32px;
+    }
+
+    .contact-grid {
+      display: grid;
+      gap: 6px;
+      min-width: 240px;
+    }
+
+    .contact-grid input {
+      padding: 7px 8px;
+      font-size: 12px;
+    }
+
+    .contact-actions {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px;
+    }
+
+    .contact-actions a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 30px;
+      padding: 6px 8px;
+      border-radius: 6px;
+      background: #314155;
+      color: white;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .contact-actions a.missing {
+      background: #edf1f7;
+      color: #667085;
+      pointer-events: none;
+    }
+
+    .empty {
+      background: white;
+      border: 1px dashed #abb6c5;
+      border-radius: 8px;
+      padding: 34px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .modal {
+      border: 0;
+      border-radius: 8px;
+      padding: 0;
+      width: min(720px, calc(100vw - 24px));
+      box-shadow: 0 24px 80px rgba(0,0,0,0.28);
+    }
+
+    .modal::backdrop { background: rgba(16, 24, 40, 0.48); }
+
+    .modal header {
+      padding: 14px 16px;
+      border: 0;
+      background: #102a43;
+    }
+
+    .modal header h3 { margin: 0; font-size: 18px; }
+    .modal .panel-body { padding: 16px; }
+
+    .notice {
+      background: #f0f7ff;
+      border: 1px solid #b8d9ff;
+      color: #173f6b;
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+
+    .template-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .template-tabs button {
+      background: white;
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+
+    .template-tabs button.active {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+
+    @media (max-width: 960px) {
+      .layout { grid-template-columns: 1fr; }
+      .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .toolbar input, .toolbar select { width: 100%; }
+      .toolbar .filters { width: 100%; }
+      .row { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      main { padding: 10px; }
+      header { padding: 18px; }
+      .stats { grid-template-columns: 1fr; }
+      .actions button, .actions .link-button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Web制作 見込み客ファインダー</h1>
+    <p>地域・業種を入れて、サイト未整備の店舗や小規模事業者をリスト化します。営業前の「探す、優先順位をつける、記録する、CSVにする」までを一画面で回せます。</p>
+  </header>
+
+  <main>
+    <div class="layout">
+      <aside class="panel">
+        <h2>発掘条件</h2>
+        <div class="panel-body">
+          <div class="notice">Google Places APIキーがある場合は自動取得できます。ない場合も、検索リンク生成とCRM管理はそのまま使えます。</div>
+
+          <label for="location">地域</label>
+          <input id="location" placeholder="例: 渋谷区, 大阪市北区, 福岡市中央区" value="渋谷区">
+
+          <label for="apiKey">Google Places APIキー</label>
+          <input id="apiKey" type="password" placeholder="ここに新しく作ったAPIキーを貼り付け">
+          <p class="hint">APIキーは保存しません。Google Cloudで Places API (New) を有効化したキーを使います。</p>
+
+          <label for="publicBaseUrl">公開URL</label>
+          <input id="publicBaseUrl" placeholder="例: https://your-app.onrender.com">
+          <p class="hint">公開後に入力すると、DM内のサンプルURLがHTTPSになります。ローカル利用中は空でOKです。</p>
+
+          <label>業種</label>
+          <div class="pill-list category-list" id="categoryPills"></div>
+          <input id="customCategory" placeholder="業種を追加 例: 歯科, 税理士, 民泊">
+          <label>最近実施した業種</label>
+          <div id="recentUsage" class="usage-list"></div>
+          <p class="hint">実行した業種は「済」と表示されます。どれを回したか迷わないための記録です。</p>
+
+          <div class="row">
+            <div>
+              <label for="maxResults">取得件数/業種</label>
+              <select id="maxResults">
+                <option value="10">10件</option>
+                <option value="20" selected>20件</option>
+              </select>
+            </div>
+            <div>
+              <label for="minReviews">最低口コミ数</label>
+              <input id="minReviews" type="number" min="0" value="5">
+            </div>
+          </div>
+
+          <div class="actions">
+            <button id="fetchBtn">APIで候補取得</button>
+            <button id="linkBtn" class="orange">検索リンク生成</button>
+            <button id="sampleBtn" class="secondary">サンプル投入</button>
+          </div>
+
+          <label for="manualName">手動追加</label>
+          <input id="manualName" placeholder="店舗名・会社名">
+          <div class="row">
+            <div>
+              <label for="manualInstagram">Instagram</label>
+              <input id="manualInstagram" placeholder="https://instagram.com/...">
+            </div>
+            <div>
+              <label for="manualX">X</label>
+              <input id="manualX" placeholder="https://x.com/...">
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <label for="manualOfficial">公式サイト</label>
+              <input id="manualOfficial" placeholder="https://...">
+            </div>
+            <div>
+              <label for="manualLine">公式LINE</label>
+              <input id="manualLine" placeholder="https://lin.ee/...">
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <label for="manualPhone">電話</label>
+              <input id="manualPhone" placeholder="例: 03-0000-0000">
+            </div>
+            <div></div>
+          </div>
+          <textarea id="manualMemo" placeholder="メモ 例: Instagramのみ、料金ページなし、予約導線が弱い"></textarea>
+          <div class="actions">
+            <button id="manualBtn" class="secondary">リストに追加</button>
+          </div>
+
+          <hr style="border:0;border-top:1px solid var(--line);margin:18px 0;">
+
+          <h2 style="border:0;padding:0;margin-bottom:8px;">営業テンプレ</h2>
+          <p class="hint">候補ごとの「DM作成」から、無料診断DM・LP提案・HP提案を作れます。</p>
+          <textarea id="dmTemplate">突然すみません。
+{{name}}さんのGoogleマップとWeb導線を拝見しました。
+
+{{category}}の場合、今回は{{recommendedType}}が合いそうです。
+理由は、初めて見る人が「強み・料金・場所・予約方法」まで一気に分かる導線があると、問い合わせ前の離脱を減らしやすいからです。
+
+イメージに近いサンプルはこちらです。
+{{sampleUrl}}
+
+もしよければ無料で、
+・今の導線で離脱しやすい箇所
+・{{recommendedType}}に入れるべき内容
+・予約/問い合わせにつながる見せ方
+を3つに絞ってお送りします。
+
+売り込みではなく、まずは無料診断だけです。
+必要なければスルーで大丈夫です。</textarea>
+        </div>
+      </aside>
+
+      <section>
+        <details class="guide" open>
+          <summary>このサイトの使い方</summary>
+          <div class="guide-content">
+            <ol>
+              <li>地域を入れて、営業したい業種にチェックします。</li>
+              <li>APIキーを貼り、APIで候補取得を押します。キーなしなら検索リンク生成で手動発掘します。</li>
+              <li>スコアが高い順に、サイトなし・SNS中心・口コミありの候補を見ます。</li>
+              <li>DM作成で無料診断DMを送り、反応が来たらLP提案またはHP提案を送ります。</li>
+              <li>送ったらステータスを診断送付、ラフ提案、商談化に変えます。</li>
+            </ol>
+            <p><strong>契約率を上げる流れ:</strong> 無料診断DM → 業種別サンプルURL → 改善ポイント3つ → 1枚ラフ提示 → 10万円前後の制作提案 → Googleマップ改善の月額提案。</p>
+            <p><strong>Googleマップ改善サポート:</strong> 口コミ購入ではなく、プロフィール整備、写真追加、投稿更新、口コミ返信、自然な口コミ依頼導線を商品化します。</p>
+          </div>
+        </details>
+
+        <div class="stats">
+          <div class="stat"><span>候補数</span><strong id="totalStat">0</strong></div>
+          <div class="stat"><span>高優先度</span><strong id="hotStat">0</strong></div>
+          <div class="stat"><span>未連絡</span><strong id="newStat">0</strong></div>
+          <div class="stat"><span>商談化</span><strong id="dealStat">0</strong></div>
+        </div>
+
+        <div class="panel">
+          <h2>見込み客リスト</h2>
+          <div class="panel-body">
+            <div class="toolbar">
+              <div class="filters">
+                <input id="searchBox" placeholder="店舗名・住所・メモで検索">
+                <select id="statusFilter">
+                  <option value="all">全ステータス</option>
+                  <option value="未連絡">未連絡</option>
+                  <option value="診断送付">診断送付</option>
+                  <option value="ラフ提案">ラフ提案</option>
+                  <option value="商談化">商談化</option>
+                  <option value="失注">失注</option>
+                </select>
+                <select id="priorityFilter">
+                  <option value="all">全優先度</option>
+                  <option value="hot">高優先度</option>
+                  <option value="mid">中優先度</option>
+                  <option value="low">低優先度</option>
+                </select>
+              </div>
+              <div class="actions" style="margin:0;">
+                <button id="exportBtn" class="secondary">CSV出力</button>
+                <button id="clearBtn" class="danger">全消去</button>
+              </div>
+            </div>
+
+            <div id="searchLinks" class="pill-list" style="margin-bottom:12px;"></div>
+            <div id="list"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <dialog id="dmModal" class="modal">
+    <header><h3>DM文面</h3></header>
+    <div class="panel-body">
+      <div class="template-tabs">
+        <button id="dmModeBtn" class="active" data-template-mode="dm">無料診断DM</button>
+        <button data-template-mode="lp">LP提案</button>
+        <button data-template-mode="hp">HP提案</button>
+        <button data-template-mode="maps">Googleマップ改善</button>
+        <button data-template-mode="follow">追客文</button>
+      </div>
+      <textarea id="dmOutput" style="min-height:260px;"></textarea>
+      <p class="hint">コピー後はInstagram DM、X DM、問い合わせフォーム、メールに貼り付けて送ります。自動送信はしません。</p>
+      <div class="actions">
+        <button id="copyDmBtn">コピー</button>
+        <a id="searchTargetBtn" class="link-button secondary" href="#" target="_blank" rel="noopener">相手を検索</a>
+        <button id="closeDmBtn" class="ghost">閉じる</button>
+      </div>
+    </div>
+  </dialog>
+
+  <script>
+    const categories = [
+      "美容室",
+      "整体院",
+      "パーソナルジム",
+      "カフェ",
+      "ネイルサロン",
+      "エステサロン",
+      "税理士",
+      "学習塾",
+      "民泊",
+      "歯科医院",
+      "クリニック",
+      "整骨院",
+      "鍼灸院",
+      "動物病院",
+      "飲食店",
+      "居酒屋",
+      "レストラン",
+      "バー",
+      "パン屋",
+      "写真館",
+      "結婚相談所",
+      "不動産会社",
+      "工務店",
+      "リフォーム会社",
+      "外壁塗装",
+      "ハウスクリーニング",
+      "司法書士",
+      "行政書士",
+      "社労士",
+      "弁護士",
+      "保険代理店",
+      "中古車販売",
+      "レンタルスペース",
+      "ダンス教室",
+      "ヨガ教室",
+      "英会話教室",
+      "音楽教室",
+      "ペットサロン",
+      "着物レンタル",
+      "整体スクール"
+    ];
+    const stateKey = "web_prospect_finder_v1";
+    const categoryUsageKey = "web_prospect_category_usage_v1";
+    const publicBaseUrlKey = "web_prospect_public_base_url_v1";
+    let prospects = loadProspects();
+    let currentDmProspectId = null;
+    let currentTemplateMode = "dm";
+
+    const el = (id) => document.getElementById(id);
+
+    function initCategories(preselected = null) {
+      const wrap = el("categoryPills");
+      const usage = loadCategoryUsage();
+      wrap.innerHTML = "";
+      categories.forEach((cat, index) => {
+        const used = usage[cat];
+        const checked = preselected ? preselected.includes(cat) : index < 4;
+        const label = document.createElement("label");
+        label.className = `pill${used ? " used" : ""}`;
+        label.title = used ? `最終実施: ${formatDateTime(used.lastUsedAt)} / ${used.lastLocation || ""}` : "";
+        label.innerHTML = `<input type="checkbox" value="${escapeHtml(cat)}" ${checked ? "checked" : ""}>${escapeHtml(cat)}${used ? " 済" : ""}`;
+        wrap.appendChild(label);
+      });
+      renderRecentUsage();
+    }
+
+    function selectedCategories() {
+      const checked = [...document.querySelectorAll("#categoryPills input:checked")].map((input) => input.value);
+      const custom = el("customCategory").value.split(",").map((v) => v.trim()).filter(Boolean);
+      return [...new Set([...checked, ...custom])];
+    }
+
+    function loadProspects() {
+      try {
+        return JSON.parse(localStorage.getItem(stateKey)) || [];
+      } catch {
+        return [];
+      }
+    }
+
+    function saveProspects() {
+      localStorage.setItem(stateKey, JSON.stringify(prospects));
+    }
+
+    function loadCategoryUsage() {
+      try {
+        return JSON.parse(localStorage.getItem(categoryUsageKey)) || {};
+      } catch {
+        return {};
+      }
+    }
+
+    function saveCategoryUsage(usage) {
+      localStorage.setItem(categoryUsageKey, JSON.stringify(usage));
+    }
+
+    function loadPublicBaseUrl() {
+      return localStorage.getItem(publicBaseUrlKey) || "";
+    }
+
+    function savePublicBaseUrl() {
+      const input = el("publicBaseUrl");
+      if (!input) return;
+      localStorage.setItem(publicBaseUrlKey, input.value.trim());
+    }
+
+    function normalizeUrl(value) {
+      const raw = String(value || "").trim();
+      if (!raw) return "";
+      if (/^https?:\/\//i.test(raw)) return raw;
+      return `https://${raw}`;
+    }
+
+    function phoneUrl(value) {
+      const digits = String(value || "").replace(/[^\d+]/g, "");
+      return digits ? `tel:${digits}` : "";
+    }
+
+    function markCategoriesUsed(cats, method) {
+      const usage = loadCategoryUsage();
+      const location = el("location").value.trim();
+      const now = new Date().toISOString();
+      cats.forEach((cat) => {
+        usage[cat] = {
+          count: (usage[cat]?.count || 0) + 1,
+          lastUsedAt: now,
+          lastLocation: location,
+          method
+        };
+      });
+      saveCategoryUsage(usage);
+      initCategories(cats);
+    }
+
+    function renderRecentUsage() {
+      const wrap = el("recentUsage");
+      if (!wrap) return;
+      const usage = loadCategoryUsage();
+      const items = Object.entries(usage)
+        .sort((a, b) => new Date(b[1].lastUsedAt) - new Date(a[1].lastUsedAt))
+        .slice(0, 12);
+
+      if (!items.length) {
+        wrap.innerHTML = `<div class="hint">まだ実施履歴はありません。</div>`;
+        return;
+      }
+
+      wrap.innerHTML = items.map(([cat, data]) => `
+        <div class="usage-item">
+          <div>
+            <strong>${escapeHtml(cat)}</strong>
+            <span>${escapeHtml(data.lastLocation || "-")} / ${escapeHtml(data.method || "-")}</span>
+          </div>
+          <span>${formatDateTime(data.lastUsedAt)}</span>
+        </div>
+      `).join("");
+    }
+
+    function formatDateTime(value) {
+      if (!value) return "-";
+      const d = new Date(value);
+      if (Number.isNaN(d.getTime())) return "-";
+      return `${d.getMonth() + 1}/${d.getDate()} ${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`;
+    }
+
+    function stableId(input) {
+      let hash = 0;
+      for (let i = 0; i < input.length; i++) {
+        hash = ((hash << 5) - hash) + input.charCodeAt(i);
+        hash |= 0;
+      }
+      return "p_" + Math.abs(hash);
+    }
+
+    function normalizePlace(place, category, source) {
+      const name = place.displayName?.text || place.name || "";
+      const reviews = Number(place.userRatingCount || place.reviews || 0);
+      const rating = Number(place.rating || 0);
+      const website = place.websiteUri || place.website || "";
+      const instagram = place.instagram || "";
+      const xUrl = place.xUrl || place.x || "";
+      const officialUrl = place.officialUrl || website || "";
+      const officialLine = place.officialLine || place.line || "";
+      const address = place.formattedAddress || place.address || "";
+      const mapsUrl = place.googleMapsUri || place.mapsUrl || "";
+      const phone = place.nationalPhoneNumber || place.phone || "";
+      const memo = place.memo || "";
+      const scoreData = scoreProspect({ website, reviews, rating, memo });
+      return {
+        id: stableId([name, address, category].join("|")),
+        name,
+        category,
+        address,
+        phone,
+        instagram,
+        xUrl,
+        officialUrl,
+        officialLine,
+        rating,
+        reviews,
+        website,
+        mapsUrl,
+        source,
+        score: scoreData.score,
+        reasons: scoreData.reasons,
+        status: "未連絡",
+        memo,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      };
+    }
+
+    function scoreProspect(item) {
+      let score = 40;
+      const reasons = [];
+      if (!item.website) {
+        score += 30;
+        reasons.push("サイトなし");
+      } else if (/instagram|facebook|x\.com|twitter|lit\.link|linktr\.ee/i.test(item.website)) {
+        score += 18;
+        reasons.push("SNS/リンク集中心");
+      }
+      if (item.reviews >= 30) {
+        score += 15;
+        reasons.push("口コミ多め");
+      } else if (item.reviews >= 5) {
+        score += 8;
+        reasons.push("一定の集客あり");
+      }
+      if (item.rating >= 4.2) {
+        score += 8;
+        reasons.push("評価が高い");
+      }
+      if (/料金|予約|導線|古い|見づらい|instagramのみ|snsのみ/i.test(item.memo || "")) {
+        score += 10;
+        reasons.push("導線改善余地");
+      }
+      return { score: Math.min(100, score), reasons: reasons.length ? reasons : ["要確認"] };
+    }
+
+    function priority(score) {
+      if (score >= 75) return "hot";
+      if (score >= 58) return "mid";
+      return "low";
+    }
+
+    async function fetchPlaces() {
+      const apiKey = el("apiKey").value.trim();
+      if (!apiKey) {
+        alert("Google Places APIキーを入力してください。キーなしの場合は「検索リンク生成」を使ってください。");
+        return;
+      }
+      const location = el("location").value.trim();
+      const cats = selectedCategories();
+      if (!location || !cats.length) {
+        alert("地域と業種を入力してください。");
+        return;
+      }
+
+      el("fetchBtn").disabled = true;
+      el("fetchBtn").textContent = "取得中...";
+
+      try {
+        for (const category of cats) {
+          const res = await fetch("https://places.googleapis.com/v1/places:searchText", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "X-Goog-Api-Key": apiKey,
+              "X-Goog-FieldMask": "places.displayName,places.formattedAddress,places.rating,places.userRatingCount,places.websiteUri,places.googleMapsUri,places.nationalPhoneNumber,places.businessStatus,places.primaryType"
+            },
+            body: JSON.stringify({
+              textQuery: `${location} ${category}`,
+              maxResultCount: Number(el("maxResults").value),
+              languageCode: "ja"
+            })
+          });
+
+          if (!res.ok) {
+            const message = await res.text();
+            throw new Error(message || `Google API error: ${res.status}`);
+          }
+
+          const data = await res.json();
+          const minReviews = Number(el("minReviews").value || 0);
+          const places = (data.places || [])
+            .filter((p) => Number(p.userRatingCount || 0) >= minReviews)
+            .map((p) => normalizePlace(p, category, "Google Places API"));
+          mergeProspects(places);
+        }
+        markCategoriesUsed(cats, "API取得");
+        saveProspects();
+        render();
+      } catch (err) {
+        alert("取得に失敗しました。APIキー、Places API(New)の有効化、請求設定、ブラウザの通信許可を確認してください。\n\n" + err.message.slice(0, 500));
+      } finally {
+        el("fetchBtn").disabled = false;
+        el("fetchBtn").textContent = "APIで候補取得";
+      }
+    }
+
+    function mergeProspects(items) {
+      const existing = new Map(prospects.map((p) => [p.id, p]));
+      items.forEach((item) => {
+        if (!existing.has(item.id)) existing.set(item.id, item);
+      });
+      prospects = [...existing.values()].sort((a, b) => b.score - a.score);
+    }
+
+    function generateSearchLinks() {
+      const location = el("location").value.trim();
+      const cats = selectedCategories();
+      if (!location || !cats.length) {
+        alert("地域と業種を入力してください。");
+        return;
+      }
+      const wrap = el("searchLinks");
+      wrap.innerHTML = "";
+      cats.forEach((cat) => {
+        const q = encodeURIComponent(`${location} ${cat} ホームページなし OR Instagram`);
+        const maps = `https://www.google.com/maps/search/${encodeURIComponent(location + " " + cat)}`;
+        const insta = `https://www.google.com/search?q=${q}+site%3Ainstagram.com`;
+        const x = `https://www.google.com/search?q=${q}+site%3Ax.com`;
+        wrap.appendChild(linkPill(`Maps: ${cat}`, maps));
+        wrap.appendChild(linkPill(`Instagram: ${cat}`, insta));
+        wrap.appendChild(linkPill(`X: ${cat}`, x));
+      });
+      markCategoriesUsed(cats, "検索リンク");
+    }
+
+    function linkPill(text, href) {
+      const a = document.createElement("a");
+      a.className = "pill";
+      a.href = href;
+      a.target = "_blank";
+      a.rel = "noopener";
+      a.textContent = text;
+      return a;
+    }
+
+    function addManual() {
+      const name = el("manualName").value.trim();
+      if (!name) {
+        alert("店舗名・会社名を入力してください。");
+        return;
+      }
+      const category = selectedCategories()[0] || "未分類";
+      const item = normalizePlace({
+        name,
+        memo: el("manualMemo").value.trim(),
+        address: el("location").value.trim(),
+        instagram: normalizeUrl(el("manualInstagram").value),
+        xUrl: normalizeUrl(el("manualX").value),
+        officialUrl: normalizeUrl(el("manualOfficial").value),
+        officialLine: normalizeUrl(el("manualLine").value),
+        website: normalizeUrl(el("manualOfficial").value),
+        phone: el("manualPhone").value.trim()
+      }, category, "手動追加");
+      mergeProspects([item]);
+      markCategoriesUsed([category], "手動追加");
+      saveProspects();
+      el("manualName").value = "";
+      el("manualInstagram").value = "";
+      el("manualX").value = "";
+      el("manualOfficial").value = "";
+      el("manualLine").value = "";
+      el("manualPhone").value = "";
+      el("manualMemo").value = "";
+      render();
+    }
+
+    function addSamples() {
+      const samples = [
+        { name: "青山サンプル整体院", address: "東京都渋谷区", rating: 4.6, reviews: 42, website: "", mapsUrl: "https://www.google.com/maps", memo: "サイトなし。LINE予約はあるが初回向け説明が弱い" },
+        { name: "Cafe Sample Roastery", address: "東京都渋谷区", rating: 4.4, reviews: 83, website: "https://instagram.com/", mapsUrl: "https://www.google.com/maps", memo: "Instagram中心。メニューとアクセスを1枚にまとめる余地" },
+        { name: "代々木サンプルジム", address: "東京都渋谷区", rating: 4.1, reviews: 17, website: "https://example.com", mapsUrl: "https://www.google.com/maps", memo: "料金導線が深い。無料体験CTAを改善できそう" }
+      ].map((p, i) => normalizePlace(p, ["整体院", "カフェ", "パーソナルジム"][i], "サンプル"));
+      mergeProspects(samples);
+      saveProspects();
+      render();
+    }
+
+    function filteredProspects() {
+      const q = el("searchBox").value.trim().toLowerCase();
+      const status = el("statusFilter").value;
+      const pr = el("priorityFilter").value;
+      return prospects.filter((p) => {
+        const text = [p.name, p.address, p.memo, p.category, p.instagram, p.xUrl, p.officialUrl, p.officialLine, p.phone, p.reasons.join(" ")].join(" ").toLowerCase();
+        return (!q || text.includes(q))
+          && (status === "all" || p.status === status)
+          && (pr === "all" || priority(p.score) === pr);
+      });
+    }
+
+    function render() {
+      renderStats();
+      const items = filteredProspects();
+      const list = el("list");
+      if (!items.length) {
+        list.innerHTML = `<div class="empty">まだ候補がありません。APIで取得するか、検索リンクから候補を見つけて手動追加してください。</div>`;
+        return;
+      }
+
+      list.innerHTML = `
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>優先度</th>
+                <th>候補</th>
+                <th>根拠</th>
+                <th>連絡先/リンク</th>
+                <th>営業状態</th>
+                <th>メモ</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${items.map(rowHtml).join("")}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    function rowHtml(p) {
+      const cls = priority(p.score);
+      const scoreClass = cls === "hot" ? "" : cls;
+      const tags = p.reasons.map((r) => `<span class="tag ${r.includes("なし") ? "hot" : r.includes("SNS") ? "warn" : ""}">${escapeHtml(r)}</span>`).join("");
+      return `
+        <tr>
+          <td><span class="score ${scoreClass}">${p.score}</span></td>
+          <td>
+            <div class="name">${escapeHtml(p.name)}</div>
+            <div>${escapeHtml(p.category)} / ${escapeHtml(p.address || "-")}</div>
+            <div class="hint">${escapeHtml(p.source || "")}</div>
+          </td>
+          <td>
+            ${tags}
+            <div class="hint">評価 ${p.rating || "-"} / 口コミ ${p.reviews || 0}</div>
+          </td>
+          <td>
+            <div class="contact-grid">
+              <input data-action="instagram" data-id="${p.id}" value="${escapeHtml(p.instagram || "")}" placeholder="Instagram URL">
+              <input data-action="xUrl" data-id="${p.id}" value="${escapeHtml(p.xUrl || "")}" placeholder="X URL">
+              <input data-action="officialUrl" data-id="${p.id}" value="${escapeHtml(p.officialUrl || p.website || "")}" placeholder="公式サイト URL">
+              <input data-action="officialLine" data-id="${p.id}" value="${escapeHtml(p.officialLine || "")}" placeholder="公式LINE URL">
+              <input data-action="phone" data-id="${p.id}" value="${escapeHtml(p.phone || "")}" placeholder="電話番号">
+              <div class="contact-actions">
+                ${contactLink("Instagram", p.instagram)}
+                ${contactLink("X", p.xUrl)}
+                ${contactLink("公式", p.officialUrl || p.website)}
+                ${contactLink("LINE", p.officialLine)}
+                ${contactLink("電話", phoneUrl(p.phone))}
+              </div>
+              ${p.mapsUrl ? `<a href="${escapeAttr(p.mapsUrl)}" target="_blank" rel="noopener">Googleマップ</a>` : ""}
+            </div>
+          </td>
+          <td>
+            <select data-action="status" data-id="${p.id}">
+              ${["未連絡", "診断送付", "ラフ提案", "商談化", "失注"].map((s) => `<option ${p.status === s ? "selected" : ""}>${s}</option>`).join("")}
+            </select>
+          </td>
+          <td>
+            <textarea data-action="memo" data-id="${p.id}" style="min-height:80px;">${escapeHtml(p.memo || "")}</textarea>
+          </td>
+          <td>
+            <div class="small-actions">
+              <button data-action="dm" data-id="${p.id}">DM作成</button>
+              <a class="link-button secondary" href="${googleSearchUrl(p.name + " " + p.address)}" target="_blank" rel="noopener">検索</a>
+              <button class="danger" data-action="delete" data-id="${p.id}">削除</button>
+            </div>
+          </td>
+        </tr>
+      `;
+    }
+
+    function renderStats() {
+      el("totalStat").textContent = prospects.length;
+      el("hotStat").textContent = prospects.filter((p) => priority(p.score) === "hot").length;
+      el("newStat").textContent = prospects.filter((p) => p.status === "未連絡").length;
+      el("dealStat").textContent = prospects.filter((p) => p.status === "商談化").length;
+    }
+
+    function contactLink(label, href) {
+      const url = String(href || "").startsWith("tel:") ? href : normalizeUrl(href);
+      if (!url) return `<a class="missing" href="#">${label}</a>`;
+      return `<a href="${escapeAttr(url)}" target="_blank" rel="noopener">${label}</a>`;
+    }
+
+    function updateProspect(id, patch) {
+      prospects = prospects.map((p) => {
+        if (p.id !== id) return p;
+        const next = { ...p, ...patch, updatedAt: new Date().toISOString() };
+        const recalculated = scoreProspect(next);
+        return { ...next, score: recalculated.score, reasons: recalculated.reasons };
+      }).sort((a, b) => b.score - a.score);
+      saveProspects();
+      render();
+    }
+
+    function deleteProspect(id) {
+      prospects = prospects.filter((p) => p.id !== id);
+      saveProspects();
+      render();
+    }
+
+    function showDm(id) {
+      currentDmProspectId = id;
+      currentTemplateMode = "dm";
+      updateTemplateTabs();
+      renderTemplateOutput();
+      const p = prospects.find((item) => item.id === id);
+      if (p) el("searchTargetBtn").href = googleSearchUrl(`${p.name} ${p.address || ""} Instagram 問い合わせ`);
+      el("dmModal").showModal();
+    }
+
+    function updateTemplateTabs() {
+      document.querySelectorAll("[data-template-mode]").forEach((button) => {
+        button.classList.toggle("active", button.dataset.templateMode === currentTemplateMode);
+      });
+    }
+
+    function renderTemplateOutput() {
+      const p = prospects.find((item) => item.id === currentDmProspectId);
+      if (!p) return;
+      const templates = {
+        dm: buildDiagnosisDm(p),
+        lp: buildLpProposal(p),
+        hp: buildHpProposal(p),
+        maps: buildMapsSupportProposal(p),
+        follow: buildFollowUpMessage(p)
+      };
+      el("dmOutput").value = templates[currentTemplateMode];
+    }
+
+    function sampleForCategory(category) {
+      const cat = category || "";
+      if (/美容|エステ|ネイル|ペットサロン|着物/.test(cat)) {
+        return { type: "LP", path: "samples/salon-lp.html", label: "サロン向け予約LP" };
+      }
+      if (/整体|整骨|鍼灸|クリニック|歯科|動物病院|ジム|ヨガ/.test(cat)) {
+        return { type: "LP", path: "samples/clinic-lp.html", label: "予約・相談向けLP" };
+      }
+      if (/カフェ|飲食|居酒屋|レストラン|バー|パン屋/.test(cat)) {
+        return { type: "LP", path: "samples/restaurant-lp.html", label: "飲食店向け来店LP" };
+      }
+      if (/税理士|司法書士|行政書士|社労士|弁護士|保険/.test(cat)) {
+        return { type: "HP", path: "samples/professional-hp.html", label: "士業向け信頼型HP" };
+      }
+      if (/工務店|リフォーム|外壁|不動産|ハウスクリーニング|中古車/.test(cat)) {
+        return { type: "HP", path: "samples/home-service-hp.html", label: "住宅サービス向けHP" };
+      }
+      return { type: "LP", path: "samples/clinic-lp.html", label: "問い合わせ向けLP" };
+    }
+
+    function absoluteSampleUrl(path) {
+      const base = normalizeUrl(el("publicBaseUrl")?.value || loadPublicBaseUrl());
+      if (base) return new URL(path, base.endsWith("/") ? base : `${base}/`).href;
+      return new URL(path, window.location.href).href;
+    }
+
+    function businessAngle(category) {
+      const cat = category || "事業";
+      if (/整体|整骨|鍼灸|クリニック|歯科|動物病院|エステ|ネイル|美容|ペット/.test(cat)) {
+        return {
+          audience: "初めて予約する人",
+          conversion: "予約・LINE相談",
+          proof: "施術内容、料金、来店前の不安解消、お客様の声",
+          offer: "初回予約につながる1枚LP"
+        };
+      }
+      if (/カフェ|飲食|居酒屋|レストラン|バー|パン屋/.test(cat)) {
+        return {
+          audience: "近くでお店を探している人",
+          conversion: "来店・予約・Googleマップ経由の問い合わせ",
+          proof: "メニュー、写真、営業時間、アクセス、席や雰囲気",
+          offer: "来店につながる店舗LP"
+        };
+      }
+      if (/税理士|司法書士|行政書士|社労士|弁護士|保険/.test(cat)) {
+        return {
+          audience: "相談先を比較している人",
+          conversion: "無料相談・問い合わせ",
+          proof: "対応分野、料金目安、相談の流れ、実績、信頼感",
+          offer: "相談予約につながる信頼型HP"
+        };
+      }
+      if (/工務店|リフォーム|外壁|不動産|ハウスクリーニング|中古車/.test(cat)) {
+        return {
+          audience: "依頼先を比較している人",
+          conversion: "見積もり依頼・問い合わせ",
+          proof: "施工事例、料金目安、対応エリア、実績、口コミ",
+          offer: "見積もり依頼につながるHP"
+        };
+      }
+      if (/学習|教室|スクール|ヨガ|ダンス|英会話|音楽/.test(cat)) {
+        return {
+          audience: "体験先を探している人",
+          conversion: "体験申込・問い合わせ",
+          proof: "レッスン内容、料金、講師、通いやすさ、体験の流れ",
+          offer: "体験申込につながるLP"
+        };
+      }
+      return {
+        audience: "初めて比較している人",
+        conversion: "問い合わせ・予約",
+        proof: "強み、料金、事例、口コミ、問い合わせ導線",
+        offer: "問い合わせにつながる1枚LP"
+      };
+    }
+
+    function fillTemplate(template, p) {
+      const sample = sampleForCategory(p.category);
+      return template
+        .replaceAll("{{name}}", p.name)
+        .replaceAll("{{category}}", p.category)
+        .replaceAll("{{address}}", p.address || "")
+        .replaceAll("{{score}}", p.score)
+        .replaceAll("{{reasons}}", p.reasons.join("、"))
+        .replaceAll("{{recommendedType}}", sample.type)
+        .replaceAll("{{sampleUrl}}", absoluteSampleUrl(sample.path))
+        .replaceAll("{{sampleLabel}}", sample.label);
+    }
+
+    function buildDiagnosisDm(p) {
+      return fillTemplate(el("dmTemplate").value, p);
+    }
+
+    function buildLpProposal(p) {
+      const angle = businessAngle(p.category);
+      const sample = sampleForCategory(p.category);
+      return `${p.name}さん向けに、もしLPを作るならこの構成が合いそうです。
+
+サンプル:
+${sample.label}
+${absoluteSampleUrl(sample.path)}
+
+目的:
+${angle.audience}が、迷わず${angle.conversion}まで進める状態を作ること。
+
+LP構成案:
+1. ファーストビュー
+「誰向けの${p.category}か」「何が強みか」「今すぐ何をすればいいか」を一画面で見せます。
+
+2. 選ばれる理由
+${angle.proof}を、初めて見る人にも分かる言葉で整理します。
+
+3. 料金・サービス内容
+問い合わせ前の不安を減らすため、目安だけでも見える形にします。
+
+4. 口コミ・実績
+Googleマップの評価やお客様の声を、信頼材料として見せます。
+
+5. 予約・問い合わせ導線
+LINE、電話、フォーム、Googleマップを1ページ内にまとめます。
+
+この形なら、ただ綺麗なページではなく「予約前の不安を減らして、問い合わせに進ませるページ」になります。
+まずは無料で、ラフの見本だけ作れます。`;
+    }
+
+    function buildHpProposal(p) {
+      const angle = businessAngle(p.category);
+      const sample = sampleForCategory(p.category);
+      return `${p.name}さんの場合、LPだけでなくHPとして作るなら、以下の形が良さそうです。
+
+サンプル:
+${sample.label}
+${absoluteSampleUrl(sample.path)}
+
+目的:
+${angle.audience}に対して、比較段階で信頼され、${angle.conversion}につながる導線を作ること。
+
+HP構成案:
+・トップページ: 強み、対象者、予約/問い合わせ導線
+・サービスページ: 内容、料金、流れ、よくある質問
+・実績/お客様の声: 口コミ、事例、選ばれている理由
+・アクセス/店舗情報: 営業時間、地図、駐車場、連絡方法
+・問い合わせページ: LINE、電話、フォームを分かりやすく配置
+
+特に改善できそうな点:
+${p.reasons.map((reason) => `・${reason}`).join("\n")}
+
+いきなり大きく作るより、まずはトップと問い合わせ導線を固めて、反応を見ながら必要なページを足す流れが費用対効果高いです。
+必要なら、最初に無料で「トップページのラフ案」だけお見せできます。`;
+    }
+
+    function buildMapsSupportProposal(p) {
+      return `${p.name}さん向けのGoogleマップ改善サポート案です。
+
+これは口コミを買う施策ではなく、実際のお客様が自然に口コミを書きやすくする導線づくりです。
+
+改善できること:
+1. Googleビジネスプロフィールの情報整理
+営業時間、サービス内容、写真、予約リンク、説明文を整えます。
+
+2. 写真・投稿の改善
+初めて見る人が雰囲気をつかめる写真、メニュー、施工事例、スタッフ写真を増やします。
+
+3. 口コミ依頼導線
+来店後に自然にお願いできるQRカードやLINE文面を作ります。
+支払い・割引・特典と引き換えの口コミ依頼はしません。
+
+4. 口コミ返信テンプレ
+良い口コミにも低評価にも、信頼感が上がる返信文を作ります。
+
+5. LP/HPとの連携
+Googleマップから来た人を、料金・予約・問い合わせが分かるページへ流します。
+
+提案しやすい商品:
+・初期改善: 3万円から5万円
+・月額改善: 1万円から3万円
+・LP制作セット: 10万円から15万円
+
+GoogleマップとWebページをセットで整えると、検索で見つけた人が問い合わせまで進みやすくなります。`;
+    }
+
+    function buildFollowUpMessage(p) {
+      const sample = sampleForCategory(p.category);
+      return `${p.name}さん、先日お送りした件の補足です。
+
+いきなり制作を決める必要はなく、まずは
+「今のGoogleマップ/SNSから来た人が、どこで迷っているか」
+だけ無料で見ます。
+
+${p.category}の場合、${sample.type}ならこのような見せ方が合いそうです。
+${absoluteSampleUrl(sample.path)}
+
+もし合わなければ、その時点で断っていただいて大丈夫です。
+必要でしたら、改善ポイントを3つだけ短くお送りします。`;
+    }
+
+    function exportCsv() {
+      const headers = ["name", "category", "score", "status", "rating", "reviews", "phone", "instagram", "xUrl", "officialUrl", "officialLine", "website", "mapsUrl", "address", "reasons", "memo", "source", "createdAt", "updatedAt"];
+      const rows = [headers, ...prospects.map((p) => headers.map((h) => {
+        const value = h === "reasons" ? p.reasons.join(" / ") : p[h];
+        return String(value ?? "");
+      }))];
+      const csv = rows.map((row) => row.map(csvCell).join(",")).join("\n");
+      const blob = new Blob(["\ufeff" + csv], { type: "text/csv;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `web_prospects_${new Date().toISOString().slice(0, 10)}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function csvCell(value) {
+      return `"${String(value).replaceAll('"', '""')}"`;
+    }
+
+    function googleSearchUrl(q) {
+      return `https://www.google.com/search?q=${encodeURIComponent(q)}`;
+    }
+
+    function escapeHtml(str) {
+      return String(str ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function escapeAttr(str) {
+      return escapeHtml(str).replaceAll("\n", "");
+    }
+
+    initCategories();
+    el("publicBaseUrl").value = loadPublicBaseUrl();
+    render();
+
+    el("fetchBtn").addEventListener("click", fetchPlaces);
+    el("linkBtn").addEventListener("click", generateSearchLinks);
+    el("manualBtn").addEventListener("click", addManual);
+    el("sampleBtn").addEventListener("click", addSamples);
+    el("exportBtn").addEventListener("click", exportCsv);
+    el("clearBtn").addEventListener("click", () => {
+      if (confirm("保存済みの候補をすべて削除しますか？")) {
+        prospects = [];
+        saveProspects();
+        render();
+      }
+    });
+    el("searchBox").addEventListener("input", render);
+    el("statusFilter").addEventListener("change", render);
+    el("priorityFilter").addEventListener("change", render);
+    el("publicBaseUrl").addEventListener("change", savePublicBaseUrl);
+    el("publicBaseUrl").addEventListener("blur", savePublicBaseUrl);
+    el("closeDmBtn").addEventListener("click", () => el("dmModal").close());
+    el("copyDmBtn").addEventListener("click", async () => {
+      await navigator.clipboard.writeText(el("dmOutput").value);
+      el("copyDmBtn").textContent = "コピー済み";
+      setTimeout(() => el("copyDmBtn").textContent = "コピー", 1200);
+    });
+    document.querySelectorAll("[data-template-mode]").forEach((button) => {
+      button.addEventListener("click", () => {
+        currentTemplateMode = button.dataset.templateMode;
+        updateTemplateTabs();
+        renderTemplateOutput();
+      });
+    });
+
+    el("list").addEventListener("change", (event) => {
+      const target = event.target;
+      const id = target.dataset.id;
+      if (!id) return;
+      if (target.dataset.action === "status") updateProspect(id, { status: target.value });
+      if (target.dataset.action === "memo") updateProspect(id, { memo: target.value });
+      if (target.dataset.action === "instagram") updateProspect(id, { instagram: normalizeUrl(target.value) });
+      if (target.dataset.action === "xUrl") updateProspect(id, { xUrl: normalizeUrl(target.value) });
+      if (target.dataset.action === "officialUrl") updateProspect(id, { officialUrl: normalizeUrl(target.value), website: normalizeUrl(target.value) });
+      if (target.dataset.action === "officialLine") updateProspect(id, { officialLine: normalizeUrl(target.value) });
+      if (target.dataset.action === "phone") updateProspect(id, { phone: target.value.trim() });
+    });
+
+    el("list").addEventListener("click", (event) => {
+      const target = event.target.closest("[data-action]");
+      if (!target) return;
+      const id = target.dataset.id;
+      if (target.dataset.action === "dm") showDm(id);
+      if (target.dataset.action === "delete") deleteProspect(id);
+    });
+  </script>
+</body>
+</html>
