@@ -3,100 +3,80 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>来店につながるバーLP｜株式会社MORIKA サンプル</title>
-  <meta name="description" content="バー向けのLP制作サンプルです。雰囲気・ドリンク・営業時間を伝える導線">
+  <title>飲食店向けLPサンプル</title>
   <style>
     * { box-sizing: border-box; }
-    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", sans-serif; color: #172033; background: #f5f7fb; }
-    a { color: inherit; }
-    .notice { background: #071f3b; color: white; border-bottom: 5px solid #f07821; padding: 12px 20px; text-align: center; font-weight: 900; }
-    header { min-height: 78vh; display: grid; align-items: center; padding: 48px 22px; color: white; background: linear-gradient(115deg, rgba(7,31,59,.98), rgba(18,108,95,.88)), url("../social-assets/x-header-1500x500.png") center/cover; }
-    .inner { width: min(1120px, 100%); margin: 0 auto; }
-    .badge { display: inline-flex; padding: 8px 12px; border-radius: 999px; background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.22); font-weight: 900; }
-    h1 { font-size: clamp(40px, 6vw, 76px); line-height: 1.04; margin: 20px 0 16px; letter-spacing: 0; max-width: 980px; text-shadow: 0 4px 0 rgba(0,0,0,.45), 0 12px 28px rgba(0,0,0,.45); }
-    .lead { max-width: 760px; font-size: 20px; line-height: 1.8; color: rgba(255,255,255,.94); font-weight: 700; }
-    .hero-actions, .contact-buttons { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
-    .btn { min-height: 54px; padding: 14px 20px; border-radius: 7px; background: #126c5f; color: white; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; font-weight: 950; box-shadow: 0 12px 28px rgba(0,0,0,.2); }
-    .btn.dark { background: #071f3b; }
-    .btn.light { background: white; color: #102a43; }
-    section { padding: 64px 22px; }
-    .band { background: white; }
-    h2 { font-size: clamp(30px, 4vw, 48px); line-height: 1.15; margin: 0 0 16px; letter-spacing: 0; }
-    p { line-height: 1.85; font-size: 17px; }
-    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    .grid2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
-    .card { background: white; border: 1px solid #d9e1ec; border-radius: 8px; padding: 24px; box-shadow: 0 12px 30px rgba(16,24,40,.08); }
-    .band .card { background: #f8fafc; }
-    .num { width: 42px; height: 42px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; background: #126c5f; color: white; font-weight: 950; margin-bottom: 12px; }
-    .price { font-size: 42px; font-weight: 950; color: #126c5f; margin: 6px 0; }
-    .mock { aspect-ratio: 16/10; border-radius: 8px; background: linear-gradient(135deg, #eef7f4, #e8eefc); border: 1px solid #d9e1ec; padding: 18px; display: grid; gap: 12px; }
-    .mock div { border-radius: 6px; background: white; box-shadow: 0 8px 18px rgba(16,24,40,.08); }
-    .contact { background: #102a43; color: white; text-align: center; }
-    .contact p { color: rgba(255,255,255,.86); }
-    footer { padding: 22px; text-align: center; background: #071f3b; color: rgba(255,255,255,.7); }
-    @media (max-width: 860px) { .grid, .grid2 { grid-template-columns: 1fr; } header { min-height: auto; } .btn { width: 100%; } }
+    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", sans-serif; color: #251a14; background: #fffdf8; }
+    nav { position: fixed; inset: 0 0 auto; z-index: 5; display: flex; justify-content: space-between; align-items: center; padding: 14px 24px; background: rgba(255,253,248,.92); border-bottom: 1px solid #ead8c8; backdrop-filter: blur(10px); }
+    nav strong { font-size: 18px; } nav a, .cta { text-decoration: none; border-radius: 6px; font-weight: 900; }
+    nav a, .cta { background: #d65f2b; color: white; padding: 12px 16px; }
+    header { min-height: 88vh; display: grid; align-items: end; padding: 110px 28px 40px; color: white; background: linear-gradient(rgba(0,0,0,.12), rgba(0,0,0,.72)), url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1800&q=80") center/cover; }
+    .hero, .inner { width: min(1120px, 100%); margin: 0 auto; }
+    h1 { font-size: clamp(38px, 8vw, 88px); line-height: .98; margin: 0 0 18px; letter-spacing: 0; }
+    h2 { font-size: clamp(26px, 4vw, 44px); line-height: 1.15; margin: 0 0 16px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; }
+    p { font-size: 16px; line-height: 1.85; }
+    .hero p { max-width: 760px; font-size: 19px; }
+    section { padding: 70px 24px; }
+    .band { background: #fff1e6; }
+    .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .card { background: white; border: 1px solid #ead8c8; border-radius: 8px; padding: 22px; }
+    .menu-photo { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 8px; margin-bottom: 14px; }
+    .price { font-size: 28px; font-weight: 950; color: #b94722; }
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 34px; align-items: center; }
+    .split img { width: 100%; border-radius: 8px; aspect-ratio: 4/3; object-fit: cover; }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 24px; }
+    .cta.secondary { background: white; color: #d65f2b; }
+    .contact-footer { padding: 56px 24px; background: #251a14; color: white; text-align: center; }
+    .contact-footer h2 { color: white; }
+    .contact-buttons { width: min(760px, 100%); margin: 22px auto 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .contact-buttons a { display: inline-flex; align-items: center; justify-content: center; min-height: 50px; border-radius: 6px; background: white; color: #251a14; text-decoration: none; font-weight: 900; }
+    .contact-buttons a.primary { background: #d65f2b; color: white; }
+    @media (max-width: 820px) { .grid3, .split, .contact-buttons { grid-template-columns: 1fr; } section { padding: 50px 18px; } nav { padding: 10px 14px; } }
   </style>
 </head>
 <body>
-  <div class="notice">これはバー向けのLP提案サンプルです。実際の写真・メニュー・料金に合わせて制作します。</div>
+  <nav><strong>Restaurant LP Sample</strong><a href="#access">予約・アクセス</a></nav>
   <header>
-    <div class="inner">
-      <span class="badge">バー向け / 問い合わせ特化ランディングページ</span>
-      <h1>来店につながるバーLP</h1>
-      <p class="lead">雰囲気・ドリンク・営業時間を伝える導線。初来店でも入りやすいように、価格帯、席、アクセスを整理した構成。</p>
-      <div class="hero-actions">
-        <a class="btn" href="#contact">場所を見る</a>
-        <a class="btn light" href="#sample">構成を見る</a>
-      </div>
+    <div class="hero">
+      <p>飲食店・カフェ・バー向け</p>
+      <h1>食べたい気持ちを、そのまま来店予約へ。</h1>
+      <p>写真、メニュー、営業時間、席の雰囲気、アクセスを1ページに整理。GoogleマップやSNSで見つけた人が、迷わず来店できるページです。</p>
+      <div class="actions"><a class="cta" href="#menu">メニューを見る</a><a class="cta secondary" href="#access">予約する</a></div>
     </div>
   </header>
-  <section class="band" id="sample">
-    <div class="inner grid2">
-      <div>
-        <h2>バーで必要なWeb導線</h2>
-        <p>バーは、見込み客が比較している段階で「何を頼めるか」「いくらか」「どこにあるか」「どう予約するか」がすぐ分かることが重要です。このサンプルは、SNSやGoogleマップから来た人を問い合わせまで迷わせないための構成です。</p>
-        <p><strong>入れる内容:</strong> ファーストビュー・悩み訴求・料金・事例・予約CTA</p>
-      </div>
-      <div class="mock" aria-label="ページ構成イメージ">
-        <div style="height:42px"></div><div></div><div></div><div style="height:74px"></div>
-      </div>
-    </div>
-  </section>
-  <section>
+  <section id="menu">
     <div class="inner">
-      <h2>このLPで見せる3つのポイント</h2>
-      <div class="grid">
-        <div class="card"><span class="num">1</span><h3>強みを最初に伝える</h3><p>初めて見る人が3秒で「自分に関係ある」と分かる見出しにします。</p></div>
-        <div class="card"><span class="num">2</span><h3>料金と流れを明確に</h3><p>問い合わせ前の不安を減らすため、目安料金や予約までの流れを整理します。</p></div>
-        <div class="card"><span class="num">3</span><h3>スマホで迷わせない</h3><p>電話・LINE・予約ボタンを分かりやすく置き、離脱を減らします。</p></div>
+      <h2>写真で選ばれるメニュー設計</h2>
+      <div class="grid3">
+        <div class="card"><img class="menu-photo" src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=900&q=80" alt=""><h3>看板メニュー</h3><p class="price">1,280円</p><p>まず注文してほしい商品を大きく見せます。</p></div>
+        <div class="card"><img class="menu-photo" src="https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=900&q=80" alt=""><h3>ランチ</h3><p class="price">980円から</p><p>時間帯別の来店理由を作ります。</p></div>
+        <div class="card"><img class="menu-photo" src="https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=900&q=80" alt=""><h3>ドリンク</h3><p class="price">600円から</p><p>カフェ利用、二軒目利用も取り込みます。</p></div>
       </div>
     </div>
   </section>
   <section class="band">
-    <div class="inner grid2">
-      <div class="card">
-        <h2>制作プラン例</h2>
-        <p>バー向けLP制作</p>
-        <div class="price">5万円〜</div>
-        <p>文章構成、スマホ対応、問い合わせ導線、公開設定込み。写真やメニューがあれば、より実店舗に近い形に整えられます。</p>
-      </div>
-      <div class="card">
-        <h2>改善サポート例</h2>
-        <p>公開後はGoogleマップ、SNSプロフィール、予約リンクの見直しまで含めると反応が上がりやすくなります。</p>
-      </div>
+    <div class="inner split">
+      <div><h2>来店前に知りたい情報をまとめる</h2><p>営業時間、定休日、席数、個室、支払い方法、喫煙可否、子連れ可否などを掲載。問い合わせを減らし、予約を増やします。</p></div>
+      <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1400&q=80" alt="">
     </div>
   </section>
-  <section class="contact" id="contact">
-    <div class="inner">
-      <h2>この形で作りたい方へ</h2>
-      <p>バーの内容に合わせて、写真・料金・メニュー・予約導線を入れ替えて制作できます。</p>
-      <div class="contact-buttons">
-        <a class="btn" href="https://line.me/R/ti/p/@015vzsdb" target="_blank" rel="noopener">LINEで相談</a>
-        <a class="btn dark" href="https://calendly.com/hatunemikudaisuki/30min" target="_blank" rel="noopener">30分相談</a>
-        <a class="btn light" href="mailto:info@morika.work">メール相談</a>
-      </div>
+  <section id="access">
+    <div class="inner grid3">
+      <div class="card"><h3>営業時間</h3><p>11:30-15:00 / 18:00-23:00<br>定休日: 火曜</p></div>
+      <div class="card"><h3>予約導線</h3><p>電話、予約サイト、Instagram DMを分かりやすく配置。</p></div>
+      <div class="card"><h3>アクセス</h3><p>駅徒歩、駐車場、Googleマップへの導線を掲載。</p></div>
     </div>
   </section>
-  <footer>株式会社MORIKA / Web導線ラボ</footer>
+  <footer class="contact-footer">
+    <h2>予約・お問い合わせ</h2>
+    <p>SNS、公式サイト、電話予約をまとめて、来店したい瞬間を逃しません。</p>
+    <div class="contact-buttons">
+      <a class="primary" href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://x.com/" target="_blank" rel="noopener">X</a>
+      <a href="#" target="_blank" rel="noopener">公式サイト</a>
+      <a href="tel:0000000000">電話</a>
+    </div>
+  </footer>
 </body>
 </html>

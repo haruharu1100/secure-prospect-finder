@@ -3,100 +3,91 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>相談につながる税理士HP｜株式会社MORIKA サンプル</title>
-  <meta name="description" content="税理士向けのHP制作サンプルです。信頼・専門分野・相談方法を整える導線">
+  <title>士業向けHPサンプル</title>
   <style>
     * { box-sizing: border-box; }
-    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", sans-serif; color: #172033; background: #f5f7fb; }
-    a { color: inherit; }
-    .notice { background: #071f3b; color: white; border-bottom: 5px solid #f07821; padding: 12px 20px; text-align: center; font-weight: 900; }
-    header { min-height: 78vh; display: grid; align-items: center; padding: 48px 22px; color: white; background: linear-gradient(115deg, rgba(7,31,59,.98), rgba(18,108,95,.88)), url("../social-assets/x-header-1500x500.png") center/cover; }
+    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", sans-serif; color: #142033; background: #f7f8fa; }
+    nav { position: fixed; inset: 0 0 auto; z-index: 5; display: flex; justify-content: space-between; align-items: center; padding: 14px 24px; background: rgba(255,255,255,.94); border-bottom: 1px solid #d8dee8; backdrop-filter: blur(10px); }
+    nav strong { font-size: 18px; } nav a, .cta { text-decoration: none; border-radius: 6px; font-weight: 900; }
+    nav a { background: #d49b35; color: #142033; padding: 10px 14px; }
+    header { padding: 128px 24px 64px; background: linear-gradient(90deg, rgba(16,42,67,.96), rgba(16,42,67,.78)), url("https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1800&q=80") center/cover; color: white; }
     .inner { width: min(1120px, 100%); margin: 0 auto; }
-    .badge { display: inline-flex; padding: 8px 12px; border-radius: 999px; background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.22); font-weight: 900; }
-    h1 { font-size: clamp(40px, 6vw, 76px); line-height: 1.04; margin: 20px 0 16px; letter-spacing: 0; max-width: 980px; text-shadow: 0 4px 0 rgba(0,0,0,.45), 0 12px 28px rgba(0,0,0,.45); }
-    .lead { max-width: 760px; font-size: 20px; line-height: 1.8; color: rgba(255,255,255,.94); font-weight: 700; }
-    .hero-actions, .contact-buttons { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
-    .btn { min-height: 54px; padding: 14px 20px; border-radius: 7px; background: #1f4f9a; color: white; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; font-weight: 950; box-shadow: 0 12px 28px rgba(0,0,0,.2); }
-    .btn.dark { background: #071f3b; }
-    .btn.light { background: white; color: #102a43; }
-    section { padding: 64px 22px; }
-    .band { background: white; }
-    h2 { font-size: clamp(30px, 4vw, 48px); line-height: 1.15; margin: 0 0 16px; letter-spacing: 0; }
-    p { line-height: 1.85; font-size: 17px; }
-    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    .grid2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
-    .card { background: white; border: 1px solid #d9e1ec; border-radius: 8px; padding: 24px; box-shadow: 0 12px 30px rgba(16,24,40,.08); }
-    .band .card { background: #f8fafc; }
-    .num { width: 42px; height: 42px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; background: #1f4f9a; color: white; font-weight: 950; margin-bottom: 12px; }
-    .price { font-size: 42px; font-weight: 950; color: #1f4f9a; margin: 6px 0; }
-    .mock { aspect-ratio: 16/10; border-radius: 8px; background: linear-gradient(135deg, #eef7f4, #e8eefc); border: 1px solid #d9e1ec; padding: 18px; display: grid; gap: 12px; }
-    .mock div { border-radius: 6px; background: white; box-shadow: 0 8px 18px rgba(16,24,40,.08); }
-    .contact { background: #102a43; color: white; text-align: center; }
-    .contact p { color: rgba(255,255,255,.86); }
-    footer { padding: 22px; text-align: center; background: #071f3b; color: rgba(255,255,255,.7); }
-    @media (max-width: 860px) { .grid, .grid2 { grid-template-columns: 1fr; } header { min-height: auto; } .btn { width: 100%; } }
+    h1 { font-size: clamp(36px, 7vw, 78px); line-height: 1.03; margin: 0 0 18px; letter-spacing: 0; }
+    h2 { font-size: clamp(26px, 4vw, 44px); line-height: 1.15; margin: 0 0 16px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; }
+    p { font-size: 16px; line-height: 1.85; }
+    .lead { max-width: 760px; font-size: 19px; }
+    .cta { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 14px 22px; background: #d49b35; color: #142033; }
+    .cta.secondary { background: white; color: #142033; }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 24px; }
+    section { padding: 70px 24px; }
+    .band { background: #eef2f6; }
+    .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 34px; align-items: start; }
+    .card { background: white; border: 1px solid #d8dee8; border-radius: 8px; padding: 22px; }
+    .card span { color: #b37b1f; font-weight: 950; }
+    .price { font-size: 28px; font-weight: 950; color: #102a43; }
+    table { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; }
+    th, td { padding: 16px; border-bottom: 1px solid #d8dee8; text-align: left; }
+    th { background: #102a43; color: white; }
+    .contact-footer { padding: 56px 24px; background: #102a43; color: white; text-align: center; }
+    .contact-footer h2 { color: white; }
+    .contact-buttons { width: min(760px, 100%); margin: 22px auto 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .contact-buttons a { display: inline-flex; align-items: center; justify-content: center; min-height: 50px; border-radius: 6px; background: white; color: #102a43; text-decoration: none; font-weight: 900; }
+    .contact-buttons a.primary { background: #d49b35; color: #142033; }
+    @media (max-width: 820px) { .grid3, .split, .contact-buttons { grid-template-columns: 1fr; } section { padding: 50px 18px; } nav { padding: 10px 14px; } }
   </style>
 </head>
 <body>
-  <div class="notice">これは税理士向けのHP提案サンプルです。実際の写真・メニュー・料金に合わせて制作します。</div>
+  <nav><strong>Professional HP Sample</strong><a href="#contact">無料相談</a></nav>
   <header>
     <div class="inner">
-      <span class="badge">税理士向け / 信頼型ホームページ</span>
-      <h1>相談につながる税理士HP</h1>
-      <p class="lead">信頼・専門分野・相談方法を整える導線。創業、確定申告、法人顧問などの入口を分けて無料相談へつなげる構成。</p>
-      <div class="hero-actions">
-        <a class="btn" href="#contact">無料相談</a>
-        <a class="btn light" href="#sample">構成を見る</a>
-      </div>
+      <p>税理士・司法書士・行政書士・社労士・弁護士向け</p>
+      <h1>比較されても選ばれる、信頼型ホームページ。</h1>
+      <p class="lead">士業のサイトは「かっこよさ」よりも、相談前の不安をどれだけ減らせるかが重要です。対応分野、料金目安、相談の流れ、実績を整理し、無料相談へつなげます。</p>
+      <div class="actions"><a class="cta" href="#contact">無料相談へ進む</a><a class="cta secondary" href="#price">料金目安を見る</a></div>
     </div>
   </header>
-  <section class="band" id="sample">
-    <div class="inner grid2">
-      <div>
-        <h2>税理士で必要なWeb導線</h2>
-        <p>税理士は、見込み客が比較している段階で「何を頼めるか」「いくらか」「どこにあるか」「どう予約するか」がすぐ分かることが重要です。このサンプルは、SNSやGoogleマップから来た人を問い合わせまで迷わせないための構成です。</p>
-        <p><strong>入れる内容:</strong> 会社案内・強み・実績・料金目安・問い合わせ</p>
-      </div>
-      <div class="mock" aria-label="ページ構成イメージ">
-        <div style="height:42px"></div><div></div><div></div><div style="height:74px"></div>
-      </div>
-    </div>
-  </section>
   <section>
-    <div class="inner">
-      <h2>このHPで見せる3つのポイント</h2>
-      <div class="grid">
-        <div class="card"><span class="num">1</span><h3>強みを最初に伝える</h3><p>初めて見る人が3秒で「自分に関係ある」と分かる見出しにします。</p></div>
-        <div class="card"><span class="num">2</span><h3>料金と流れを明確に</h3><p>問い合わせ前の不安を減らすため、目安料金や予約までの流れを整理します。</p></div>
-        <div class="card"><span class="num">3</span><h3>スマホで迷わせない</h3><p>電話・LINE・予約ボタンを分かりやすく置き、離脱を減らします。</p></div>
-      </div>
+    <div class="inner grid3">
+      <div class="card"><span>01</span><h3>対応分野が明確</h3><p>相続、会社設立、労務、契約など、相談者が自分ごと化しやすい入口を作ります。</p></div>
+      <div class="card"><span>02</span><h3>料金の不安を軽減</h3><p>相談料、着手金、顧問料の目安を見せ、問い合わせ前の心理的ハードルを下げます。</p></div>
+      <div class="card"><span>03</span><h3>相談の流れを可視化</h3><p>初回相談から解決までの流れを示し、安心して問い合わせできる状態にします。</p></div>
     </div>
   </section>
   <section class="band">
-    <div class="inner grid2">
-      <div class="card">
-        <h2>制作プラン例</h2>
-        <p>税理士向けHP制作</p>
-        <div class="price">5万円〜</div>
-        <p>文章構成、スマホ対応、問い合わせ導線、公開設定込み。写真やメニューがあれば、より実店舗に近い形に整えられます。</p>
-      </div>
-      <div class="card">
-        <h2>改善サポート例</h2>
-        <p>公開後はGoogleマップ、SNSプロフィール、予約リンクの見直しまで含めると反応が上がりやすくなります。</p>
-      </div>
+    <div class="inner split">
+      <div><h2>専門性を、初めての人にも分かる言葉で。</h2><p>専門用語が多いページは離脱されます。どんな悩みを解決できるか、誰に向いているか、依頼すると何が進むかを短く整理します。</p></div>
+      <div class="card"><h3>掲載する信頼材料</h3><p>代表プロフィール / 保有資格 / 対応実績 / お客様の声 / メディア掲載 / セミナー実績 / 対応エリア</p></div>
     </div>
   </section>
-  <section class="contact" id="contact">
+  <section id="price">
     <div class="inner">
-      <h2>この形で作りたい方へ</h2>
-      <p>税理士の内容に合わせて、写真・料金・メニュー・予約導線を入れ替えて制作できます。</p>
-      <div class="contact-buttons">
-        <a class="btn" href="https://line.me/R/ti/p/@015vzsdb" target="_blank" rel="noopener">LINEで相談</a>
-        <a class="btn dark" href="https://calendly.com/hatunemikudaisuki/30min" target="_blank" rel="noopener">30分相談</a>
-        <a class="btn light" href="mailto:info@morika.work">メール相談</a>
-      </div>
+      <h2>料金目安を見せて、問い合わせの質を上げる</h2>
+      <table>
+        <tr><th>サービス</th><th>内容</th><th>目安</th></tr>
+        <tr><td>初回相談</td><td>現状整理と進め方の提案</td><td class="price">0円から</td></tr>
+        <tr><td>スポット対応</td><td>書類作成・申請・契約書確認など</td><td class="price">5万円から</td></tr>
+        <tr><td>月額顧問</td><td>継続相談・定期チェック</td><td class="price">3万円から</td></tr>
+      </table>
     </div>
   </section>
-  <footer>株式会社MORIKA / Web導線ラボ</footer>
+  <section class="band" id="contact">
+    <div class="inner grid3">
+      <div class="card"><h3>電話相談</h3><p>急ぎの相談に対応。</p></div>
+      <div class="card"><h3>フォーム相談</h3><p>内容を整理して送信。</p></div>
+      <div class="card"><h3>オンライン相談</h3><p>遠方・忙しい方にも対応。</p></div>
+    </div>
+  </section>
+  <footer class="contact-footer">
+    <h2>相談・お問い合わせ</h2>
+    <p>公式サイト、SNS、電話相談への導線をまとめ、相談前の迷いをなくします。</p>
+    <div class="contact-buttons">
+      <a class="primary" href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://x.com/" target="_blank" rel="noopener">X</a>
+      <a href="#" target="_blank" rel="noopener">公式サイト</a>
+      <a href="tel:0000000000">電話</a>
+    </div>
+  </footer>
 </body>
 </html>
