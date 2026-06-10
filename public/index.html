@@ -1154,24 +1154,52 @@
       el("dmOutput").value = templates[currentTemplateMode];
     }
 
+    const sampleByCategory = {
+      "美容室": { type: "LP", path: "samples/beauty-salon-lp.html", label: "予約につながる美容室LP" },
+      "整体院": { type: "LP", path: "samples/seitai-lp.html", label: "初回予約につながる整体院LP" },
+      "パーソナルジム": { type: "LP", path: "samples/personal-gym-lp.html", label: "体験予約につながるジムLP" },
+      "カフェ": { type: "LP", path: "samples/cafe-lp.html", label: "来店につながるカフェLP" },
+      "ネイルサロン": { type: "LP", path: "samples/nail-salon-lp.html", label: "予約につながるネイルサロンLP" },
+      "エステサロン": { type: "LP", path: "samples/esthetic-salon-lp.html", label: "体験予約につながるエステLP" },
+      "税理士": { type: "HP", path: "samples/tax-accountant-hp.html", label: "相談につながる税理士HP" },
+      "学習塾": { type: "LP", path: "samples/cram-school-lp.html", label: "体験授業につながる学習塾LP" },
+      "民泊": { type: "HP", path: "samples/vacation-rental-hp.html", label: "予約前の安心を作る民泊HP" },
+      "歯科医院": { type: "HP", path: "samples/dental-clinic-hp.html", label: "予約につながる歯科医院HP" },
+      "クリニック": { type: "HP", path: "samples/medical-clinic-hp.html", label: "初診予約につながるクリニックHP" },
+      "整骨院": { type: "LP", path: "samples/seikotsu-lp.html", label: "通院予約につながる整骨院LP" },
+      "鍼灸院": { type: "LP", path: "samples/shinkyu-lp.html", label: "相談予約につながる鍼灸院LP" },
+      "動物病院": { type: "HP", path: "samples/animal-hospital-hp.html", label: "来院予約につながる動物病院HP" },
+      "飲食店": { type: "LP", path: "samples/restaurant-lp.html", label: "予約につながる飲食店LP" },
+      "居酒屋": { type: "LP", path: "samples/izakaya-lp.html", label: "宴会予約につながる居酒屋LP" },
+      "レストラン": { type: "LP", path: "samples/dining-restaurant-lp.html", label: "記念日予約につながるレストランLP" },
+      "バー": { type: "LP", path: "samples/bar-lp.html", label: "来店につながるバーLP" },
+      "パン屋": { type: "LP", path: "samples/bakery-lp.html", label: "来店につながるパン屋LP" },
+      "写真館": { type: "LP", path: "samples/photo-studio-lp.html", label: "撮影予約につながる写真館LP" },
+      "結婚相談所": { type: "LP", path: "samples/marriage-agency-lp.html", label: "無料相談につながる結婚相談所LP" },
+      "不動産会社": { type: "HP", path: "samples/real-estate-hp.html", label: "問い合わせにつながる不動産HP" },
+      "工務店": { type: "HP", path: "samples/builder-hp.html", label: "相談につながる工務店HP" },
+      "リフォーム会社": { type: "HP", path: "samples/reform-hp.html", label: "見積もり相談につながるリフォームHP" },
+      "外壁塗装": { type: "LP", path: "samples/exterior-painting-lp.html", label: "見積もりにつながる外壁塗装LP" },
+      "ハウスクリーニング": { type: "LP", path: "samples/house-cleaning-lp.html", label: "予約につながる清掃サービスLP" },
+      "司法書士": { type: "HP", path: "samples/judicial-scrivener-hp.html", label: "相談につながる司法書士HP" },
+      "行政書士": { type: "HP", path: "samples/administrative-scrivener-hp.html", label: "問い合わせにつながる行政書士HP" },
+      "社労士": { type: "HP", path: "samples/labor-consultant-hp.html", label: "顧問相談につながる社労士HP" },
+      "弁護士": { type: "HP", path: "samples/lawyer-hp.html", label: "法律相談につながる弁護士HP" },
+      "保険代理店": { type: "HP", path: "samples/insurance-agency-hp.html", label: "見直し相談につながる保険代理店HP" },
+      "中古車販売": { type: "HP", path: "samples/used-car-dealer-hp.html", label: "来店予約につながる中古車販売HP" },
+      "レンタルスペース": { type: "LP", path: "samples/rental-space-lp.html", label: "予約につながるレンタルスペースLP" },
+      "ダンス教室": { type: "LP", path: "samples/dance-school-lp.html", label: "体験レッスンにつながるダンス教室LP" },
+      "ヨガ教室": { type: "LP", path: "samples/yoga-studio-lp.html", label: "体験予約につながるヨガ教室LP" },
+      "英会話教室": { type: "LP", path: "samples/english-school-lp.html", label: "無料体験につながる英会話教室LP" },
+      "音楽教室": { type: "LP", path: "samples/music-school-lp.html", label: "体験レッスンにつながる音楽教室LP" },
+      "ペットサロン": { type: "LP", path: "samples/pet-salon-lp.html", label: "予約につながるペットサロンLP" },
+      "着物レンタル": { type: "LP", path: "samples/kimono-rental-lp.html", label: "予約につながる着物レンタルLP" },
+      "整体スクール": { type: "LP", path: "samples/seitai-school-lp.html", label: "説明会予約につながる整体スクールLP" }
+    };
+
     function sampleForCategory(category) {
       const cat = category || "";
-      if (/美容|エステ|ネイル|ペットサロン|着物/.test(cat)) {
-        return { type: "LP", path: "samples/salon-lp.html", label: "サロン向け予約LP" };
-      }
-      if (/整体|整骨|鍼灸|クリニック|歯科|動物病院|ジム|ヨガ/.test(cat)) {
-        return { type: "LP", path: "samples/clinic-lp.html", label: "予約・相談向けLP" };
-      }
-      if (/カフェ|飲食|居酒屋|レストラン|バー|パン屋/.test(cat)) {
-        return { type: "LP", path: "samples/restaurant-lp.html", label: "飲食店向け来店LP" };
-      }
-      if (/税理士|司法書士|行政書士|社労士|弁護士|保険/.test(cat)) {
-        return { type: "HP", path: "samples/professional-hp.html", label: "士業向け信頼型HP" };
-      }
-      if (/工務店|リフォーム|外壁|不動産|ハウスクリーニング|中古車/.test(cat)) {
-        return { type: "HP", path: "samples/home-service-hp.html", label: "住宅サービス向けHP" };
-      }
-      return { type: "LP", path: "samples/clinic-lp.html", label: "問い合わせ向けLP" };
+      return sampleByCategory[cat] || { type: "LP", path: "samples/service-lp.html", label: "問い合わせにつながる汎用LP" };
     }
 
     function absoluteSampleUrl(path) {
