@@ -3,83 +3,98 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>整体・治療院向けLPサンプル</title>
+  <title>相談予約につながる鍼灸院LP｜株式会社MORIKA サンプル</title>
+  <meta name="description" content="鍼灸院向けのLP制作サンプルです。不調の悩みと施術の安心感を伝える導線">
   <style>
     * { box-sizing: border-box; }
     body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", sans-serif; color: #13202f; background: #f7fbfa; }
-    nav { position: fixed; inset: 0 0 auto; z-index: 5; display: flex; justify-content: space-between; align-items: center; padding: 14px 24px; background: rgba(247,251,250,.94); border-bottom: 1px solid #d9e7e3; backdrop-filter: blur(10px); }
-    nav strong { font-size: 18px; } nav a, .cta { text-decoration: none; border-radius: 6px; font-weight: 900; }
-    nav a { color: white; background: #146c5f; padding: 10px 14px; }
-    header { min-height: 88vh; display: grid; align-items: center; padding: 110px 28px 36px; background: linear-gradient(90deg, rgba(247,251,250,.98), rgba(247,251,250,.68)), url("https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1800&q=80") center/cover; }
+    a { color: inherit; }
+    nav { position: fixed; inset: 0 0 auto; z-index: 5; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 24px; background: rgba(255,255,255,.92); border-bottom: 1px solid rgba(0,0,0,.1); backdrop-filter: blur(10px); }
+    nav strong { font-size: 18px; } nav a, .cta { text-decoration: none; border-radius: 6px; font-weight: 950; }
+    nav a, .cta { background: #146c5f; color: white; padding: 12px 16px; }
+    header { min-height: 88vh; display: grid; align-items: end; padding: 110px 28px 44px; color: white; background: linear-gradient(rgba(0,0,0,.1), rgba(0,0,0,.76)), url("https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1800&q=80") center/cover; }
     .hero, .inner { width: min(1120px, 100%); margin: 0 auto; }
-    .hero { margin: 0; }
-    .eyebrow { color: #146c5f; font-weight: 950; }
-    h1 { font-size: clamp(36px, 7vw, 78px); line-height: 1.02; margin: 0 0 18px; letter-spacing: 0; }
-    h2 { font-size: clamp(26px, 4vw, 44px); line-height: 1.15; margin: 0 0 16px; letter-spacing: 0; }
-    h3 { margin: 0 0 8px; }
+    .eyebrow { display: inline-block; margin-bottom: 14px; color: #fff; background: rgba(0,0,0,.34); border: 1px solid rgba(255,255,255,.25); padding: 7px 12px; border-radius: 999px; font-weight: 950; }
+    h1 { max-width: 960px; font-size: clamp(38px, 7.4vw, 84px); line-height: 1.01; margin: 0 0 18px; letter-spacing: 0; text-shadow: 0 4px 0 rgba(0,0,0,.5), 0 14px 30px rgba(0,0,0,.48); }
+    h2 { font-size: clamp(28px, 4vw, 46px); line-height: 1.14; margin: 0 0 16px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 22px; }
     p { font-size: 16px; line-height: 1.85; }
-    .hero p { max-width: 760px; font-size: 19px; }
-    .cta { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 14px 22px; background: #146c5f; color: white; }
-    .cta.secondary { background: white; color: #146c5f; border: 1px solid #b8d5ce; }
+    .lead { max-width: 780px; font-size: 19px; font-weight: 750; color: rgba(255,255,255,.95); }
     .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 24px; }
+    .cta.secondary { background: white; color: #146c5f; }
     section { padding: 70px 24px; }
     .band { background: #eaf4f1; }
-    .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-    .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    .card { background: white; border: 1px solid #d6e5e1; border-radius: 8px; padding: 22px; }
-    .num { width: 34px; height: 34px; display: inline-grid; place-items: center; background: #146c5f; color: white; border-radius: 999px; font-weight: 950; margin-bottom: 10px; }
-    .price { font-size: 34px; color: #146c5f; font-weight: 950; margin: 8px 0; }
     .split { display: grid; grid-template-columns: .95fr 1.05fr; gap: 34px; align-items: center; }
-    img { width: 100%; border-radius: 8px; aspect-ratio: 4/3; object-fit: cover; }
-    .contact-footer { padding: 56px 24px; background: #13202f; color: white; text-align: center; }
+    .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .card { background: white; border: 1px solid rgba(0,0,0,.12); border-radius: 8px; padding: 22px; box-shadow: 0 16px 38px rgba(16,24,40,.08); }
+    .feature { padding: 0; overflow: hidden; }
+    .feature img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+    .feature span { display: block; margin: 18px 18px 4px; font-weight: 950; color: #146c5f; }
+    .feature strong { display: block; margin: 0 18px; font-size: 28px; color: #146c5f; }
+    .feature p { margin: 8px 18px 20px; }
+    .photo { width: 100%; border-radius: 8px; aspect-ratio: 4/3; object-fit: cover; box-shadow: 0 18px 44px rgba(0,0,0,.14); }
+    .checklist { display: grid; gap: 12px; }
+    .checklist div { background: white; border-left: 5px solid #146c5f; border-radius: 8px; padding: 16px 18px; font-weight: 800; }
+    .price { font-size: 36px; color: #146c5f; font-weight: 950; margin: 8px 0; }
+    .contact-footer { padding: 58px 24px 76px; background: #13202f; color: white; text-align: center; }
     .contact-footer h2 { color: white; }
-    .contact-buttons { width: min(760px, 100%); margin: 22px auto 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
-    .contact-buttons a { display: inline-flex; align-items: center; justify-content: center; min-height: 50px; border-radius: 6px; background: white; color: #13202f; text-decoration: none; font-weight: 900; }
+    .contact-buttons { width: min(820px, 100%); margin: 22px auto 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .contact-buttons a { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; border-radius: 6px; background: white; color: #13202f; text-decoration: none; font-weight: 950; }
     .contact-buttons a.primary { background: #146c5f; color: white; }
-    @media (max-width: 880px) { .grid4, .grid3, .split, .contact-buttons { grid-template-columns: 1fr; } section { padding: 50px 18px; } nav { padding: 10px 14px; } }
+    .fixed-cta { position: sticky; bottom: 0; z-index: 4; display: flex; justify-content: center; gap: 10px; padding: 10px; background: rgba(255,255,255,.94); border-top: 1px solid rgba(0,0,0,.12); }
+    @media (max-width: 860px) { nav { padding: 10px 14px; } .grid3, .split, .contact-buttons { grid-template-columns: 1fr; } section { padding: 52px 18px; } .fixed-cta { flex-direction: column; } .cta { width: 100%; justify-content: center; } }
   </style>
 </head>
 <body>
-  <nav><strong>Clinic LP Sample</strong><a href="#reserve">初回予約</a></nav>
+  <nav><strong>鍼灸院 Sample</strong><a href="#contact">初回相談</a></nav>
   <header>
     <div class="hero">
-      <p class="eyebrow">整体・整骨院・鍼灸院・クリニック向け</p>
-      <h1>症状で悩む人を、安心して初回予約へ。</h1>
-      <p>治療院のLPでは「本当に自分の悩みに合うか」「料金はいくらか」「どんな流れか」が重要です。専門性を分かりやすく伝え、Googleマップから来た人を予約まで案内します。</p>
-      <div class="actions"><a class="cta" href="#reserve">初回相談を予約</a><a class="cta secondary" href="#flow">施術の流れ</a></div>
+      <span class="eyebrow">鍼灸院向け / 予約・問い合わせ特化LP</span>
+      <h1>不調の相談を初回予約に変える鍼灸院LP。</h1>
+      <p class="lead">不調の悩みと施術の安心感を伝える導線。症状別の説明と施術の安心感を伝え、初めての鍼灸への不安を減らします。</p>
+      <div class="actions"><a class="cta" href="#contact">初回相談</a><a class="cta secondary" href="#services">内容を見る</a></div>
     </div>
   </header>
-  <section>
-    <div class="inner grid3">
-      <div class="card"><span class="num">1</span><h3>症状別に案内</h3><p>肩こり、腰痛、姿勢、産後など、悩み別に入口を作ります。</p></div>
-      <div class="card"><span class="num">2</span><h3>施術内容を平易に</h3><p>専門用語を避け、何をするのかを初めての人向けに説明します。</p></div>
-      <div class="card"><span class="num">3</span><h3>予約前の不安解消</h3><p>料金、時間、服装、支払い、駐車場まで見せます。</p></div>
-    </div>
-  </section>
-  <section class="band" id="flow">
-    <div class="inner split">
-      <div><h2>来院前の不安を減らす導線</h2><p>「行ってみたいけど不安」を減らすために、カウンセリング、検査、施術、次回提案までの流れをカードで見せます。</p></div>
-      <img src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?auto=format&fit=crop&w=1400&q=80" alt="カウンセリングイメージ">
-    </div>
-  </section>
-  <section id="reserve">
-    <div class="inner grid4">
-      <div class="card"><span class="num">1</span><h3>問診</h3><p>悩みと生活習慣を確認。</p></div>
-      <div class="card"><span class="num">2</span><h3>検査</h3><p>原因を見える化。</p></div>
-      <div class="card"><span class="num">3</span><h3>施術</h3><p>痛みや不調へアプローチ。</p></div>
-      <div class="card"><span class="num">4</span><h3>予約</h3><p>LINE・電話ですぐ予約。</p></div>
+  <section id="services">
+    <div class="inner">
+      <h2>鍼灸院で反応を作る見せ方</h2>
+      <div class="grid3"><div class="card feature"><img src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?auto=format&fit=crop&w=900&q=80" alt=""><span>自律神経</span><strong>相談可</strong><p>言語化しにくい悩みを受ける</p></div>
+<div class="card feature"><img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=900&q=80" alt=""><span>冷え</span><strong>体質改善</strong><p>継続価値を伝える</p></div>
+<div class="card feature"><img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=900&q=80" alt=""><span>肩こり</span><strong>初回体験</strong><p>入口メニューを作る</p></div></div>
     </div>
   </section>
   <section class="band">
-    <div class="inner grid3">
-      <div class="card"><h3>初回料金</h3><p class="price">2,980円</p><p>初回の入口を分かりやすく。</p></div>
-      <div class="card"><h3>口コミ活用</h3><p>Googleレビューを信頼材料として自然に掲載。</p></div>
-      <div class="card"><h3>FAQ</h3><p>保険、服装、予約変更、子連れ可否などを掲載。</p></div>
+    <div class="inner split">
+      <div>
+        <h2>初めて見る人が迷わない導線にする。</h2>
+        <p>自律神経、冷え、肩こりなどの悩み別に説明し、初回予約を促す構成。</p>
+        <p>鍼灸院では、SNSやGoogleマップで興味を持った人が、料金・場所・予約方法で迷った瞬間に離脱します。ページ内で比較材料と問い合わせ先をまとめて、次の行動まで短くします。</p>
+      </div>
+      <img class="photo" src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?auto=format&fit=crop&w=1400&q=80" alt="鍼灸院のページイメージ">
     </div>
   </section>
-  <footer class="contact-footer">
+  <section>
+    <div class="inner split">
+      <div>
+        <h2>ページに入れる情報</h2>
+        <div class="checklist">
+          <div>強み・選ばれる理由をファーストビューで表示</div>
+          <div>料金目安、メニュー、サービス内容を整理</div>
+          <div>口コミ・実績・写真で信頼材料を追加</div>
+          <div>LINE、電話、予約フォーム、Googleマップをまとめる</div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>制作プラン例</h3>
+        <p>鍼灸院向けLP制作</p>
+        <div class="price">5万円〜</div>
+        <p>文章構成、スマホ対応、問い合わせ導線、公開設定込み。写真やメニューがあれば、より実店舗に近い形で作れます。</p>
+      </div>
+    </div>
+  </section>
+  <footer class="contact-footer" id="contact">
     <h2>予約・お問い合わせ</h2>
-    <p>Instagram、X、公式サイト、電話を押しやすく配置し、初回予約への迷いを減らします。</p>
+    <p>Instagram、X、公式サイト、電話を押しやすく配置し、問い合わせタイミングを逃しません。</p>
     <div class="contact-buttons">
       <a class="primary" href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
       <a href="https://x.com/" target="_blank" rel="noopener">X</a>
@@ -87,5 +102,6 @@
       <a href="tel:0000000000">電話</a>
     </div>
   </footer>
+  <div class="fixed-cta"><a class="cta" href="#contact">初回相談</a><a class="cta secondary" href="#services">内容を見る</a></div>
 </body>
 </html>

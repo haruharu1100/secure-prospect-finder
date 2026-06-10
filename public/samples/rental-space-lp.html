@@ -7,96 +7,101 @@
   <meta name="description" content="レンタルスペース向けのLP制作サンプルです。用途・設備・料金・空き状況を見せる導線">
   <style>
     * { box-sizing: border-box; }
-    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", sans-serif; color: #172033; background: #f5f7fb; }
+    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", sans-serif; color: #1d252c; background: #f8faf9; }
     a { color: inherit; }
-    .notice { background: #071f3b; color: white; border-bottom: 5px solid #f07821; padding: 12px 20px; text-align: center; font-weight: 900; }
-    header { min-height: 78vh; display: grid; align-items: center; padding: 48px 22px; color: white; background: linear-gradient(115deg, rgba(7,31,59,.98), rgba(18,108,95,.88)), url("../social-assets/x-header-1500x500.png") center/cover; }
-    .inner { width: min(1120px, 100%); margin: 0 auto; }
-    .badge { display: inline-flex; padding: 8px 12px; border-radius: 999px; background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.22); font-weight: 900; }
-    h1 { font-size: clamp(40px, 6vw, 76px); line-height: 1.04; margin: 20px 0 16px; letter-spacing: 0; max-width: 980px; text-shadow: 0 4px 0 rgba(0,0,0,.45), 0 12px 28px rgba(0,0,0,.45); }
-    .lead { max-width: 760px; font-size: 20px; line-height: 1.8; color: rgba(255,255,255,.94); font-weight: 700; }
-    .hero-actions, .contact-buttons { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
-    .btn { min-height: 54px; padding: 14px 20px; border-radius: 7px; background: #126c5f; color: white; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; font-weight: 950; box-shadow: 0 12px 28px rgba(0,0,0,.2); }
-    .btn.dark { background: #071f3b; }
-    .btn.light { background: white; color: #102a43; }
-    section { padding: 64px 22px; }
-    .band { background: white; }
-    h2 { font-size: clamp(30px, 4vw, 48px); line-height: 1.15; margin: 0 0 16px; letter-spacing: 0; }
-    p { line-height: 1.85; font-size: 17px; }
-    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    .grid2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
-    .card { background: white; border: 1px solid #d9e1ec; border-radius: 8px; padding: 24px; box-shadow: 0 12px 30px rgba(16,24,40,.08); }
-    .band .card { background: #f8fafc; }
-    .num { width: 42px; height: 42px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; background: #126c5f; color: white; font-weight: 950; margin-bottom: 12px; }
-    .price { font-size: 42px; font-weight: 950; color: #126c5f; margin: 6px 0; }
-    .mock { aspect-ratio: 16/10; border-radius: 8px; background: linear-gradient(135deg, #eef7f4, #e8eefc); border: 1px solid #d9e1ec; padding: 18px; display: grid; gap: 12px; }
-    .mock div { border-radius: 6px; background: white; box-shadow: 0 8px 18px rgba(16,24,40,.08); }
-    .contact { background: #102a43; color: white; text-align: center; }
-    .contact p { color: rgba(255,255,255,.86); }
-    footer { padding: 22px; text-align: center; background: #071f3b; color: rgba(255,255,255,.7); }
-    @media (max-width: 860px) { .grid, .grid2 { grid-template-columns: 1fr; } header { min-height: auto; } .btn { width: 100%; } }
+    nav { position: fixed; inset: 0 0 auto; z-index: 5; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 24px; background: rgba(255,255,255,.92); border-bottom: 1px solid rgba(0,0,0,.1); backdrop-filter: blur(10px); }
+    nav strong { font-size: 18px; } nav a, .cta { text-decoration: none; border-radius: 6px; font-weight: 950; }
+    nav a, .cta { background: #245c48; color: white; padding: 12px 16px; }
+    header { min-height: 88vh; display: grid; align-items: end; padding: 110px 28px 44px; color: white; background: linear-gradient(rgba(0,0,0,.1), rgba(0,0,0,.76)), url("https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1800&q=80") center/cover; }
+    .hero, .inner { width: min(1120px, 100%); margin: 0 auto; }
+    .eyebrow { display: inline-block; margin-bottom: 14px; color: #fff; background: rgba(0,0,0,.34); border: 1px solid rgba(255,255,255,.25); padding: 7px 12px; border-radius: 999px; font-weight: 950; }
+    h1 { max-width: 960px; font-size: clamp(38px, 7.4vw, 84px); line-height: 1.01; margin: 0 0 18px; letter-spacing: 0; text-shadow: 0 4px 0 rgba(0,0,0,.5), 0 14px 30px rgba(0,0,0,.48); }
+    h2 { font-size: clamp(28px, 4vw, 46px); line-height: 1.14; margin: 0 0 16px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 22px; }
+    p { font-size: 16px; line-height: 1.85; }
+    .lead { max-width: 780px; font-size: 19px; font-weight: 750; color: rgba(255,255,255,.95); }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 24px; }
+    .cta.secondary { background: white; color: #245c48; }
+    section { padding: 70px 24px; }
+    .band { background: #eaf1ee; }
+    .split { display: grid; grid-template-columns: .95fr 1.05fr; gap: 34px; align-items: center; }
+    .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .card { background: white; border: 1px solid rgba(0,0,0,.12); border-radius: 8px; padding: 22px; box-shadow: 0 16px 38px rgba(16,24,40,.08); }
+    .feature { padding: 0; overflow: hidden; }
+    .feature img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+    .feature span { display: block; margin: 18px 18px 4px; font-weight: 950; color: #245c48; }
+    .feature strong { display: block; margin: 0 18px; font-size: 28px; color: #245c48; }
+    .feature p { margin: 8px 18px 20px; }
+    .photo { width: 100%; border-radius: 8px; aspect-ratio: 4/3; object-fit: cover; box-shadow: 0 18px 44px rgba(0,0,0,.14); }
+    .checklist { display: grid; gap: 12px; }
+    .checklist div { background: white; border-left: 5px solid #245c48; border-radius: 8px; padding: 16px 18px; font-weight: 800; }
+    .price { font-size: 36px; color: #245c48; font-weight: 950; margin: 8px 0; }
+    .contact-footer { padding: 58px 24px 76px; background: #1d252c; color: white; text-align: center; }
+    .contact-footer h2 { color: white; }
+    .contact-buttons { width: min(820px, 100%); margin: 22px auto 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .contact-buttons a { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; border-radius: 6px; background: white; color: #1d252c; text-decoration: none; font-weight: 950; }
+    .contact-buttons a.primary { background: #245c48; color: white; }
+    .fixed-cta { position: sticky; bottom: 0; z-index: 4; display: flex; justify-content: center; gap: 10px; padding: 10px; background: rgba(255,255,255,.94); border-top: 1px solid rgba(0,0,0,.12); }
+    @media (max-width: 860px) { nav { padding: 10px 14px; } .grid3, .split, .contact-buttons { grid-template-columns: 1fr; } section { padding: 52px 18px; } .fixed-cta { flex-direction: column; } .cta { width: 100%; justify-content: center; } }
   </style>
 </head>
 <body>
-  <div class="notice">これはレンタルスペース向けのLP提案サンプルです。実際の写真・メニュー・料金に合わせて制作します。</div>
+  <nav><strong>レンタルスペース Sample</strong><a href="#contact">空き確認</a></nav>
   <header>
-    <div class="inner">
-      <span class="badge">レンタルスペース向け / 問い合わせ特化ランディングページ</span>
-      <h1>予約につながるレンタルスペースLP</h1>
-      <p class="lead">用途・設備・料金・空き状況を見せる導線。会議、撮影、イベントなど用途別に見せて予約サイトへつなげる構成。</p>
-      <div class="hero-actions">
-        <a class="btn" href="#contact">空き確認</a>
-        <a class="btn light" href="#sample">構成を見る</a>
-      </div>
+    <div class="hero">
+      <span class="eyebrow">レンタルスペース向け / 予約・問い合わせ特化LP</span>
+      <h1>用途別に予約につなげるレンタルスペースLP。</h1>
+      <p class="lead">用途・設備・料金・空き状況を見せる導線。用途、設備、料金、空き状況、アクセスを見せて予約サイトへつなげます。</p>
+      <div class="actions"><a class="cta" href="#contact">空き確認</a><a class="cta secondary" href="#services">内容を見る</a></div>
     </div>
   </header>
-  <section class="band" id="sample">
-    <div class="inner grid2">
-      <div>
-        <h2>レンタルスペースで必要なWeb導線</h2>
-        <p>レンタルスペースは、見込み客が比較している段階で「何を頼めるか」「いくらか」「どこにあるか」「どう予約するか」がすぐ分かることが重要です。このサンプルは、SNSやGoogleマップから来た人を問い合わせまで迷わせないための構成です。</p>
-        <p><strong>入れる内容:</strong> ファーストビュー・悩み訴求・料金・事例・予約CTA</p>
-      </div>
-      <div class="mock" aria-label="ページ構成イメージ">
-        <div style="height:42px"></div><div></div><div></div><div style="height:74px"></div>
-      </div>
-    </div>
-  </section>
-  <section>
+  <section id="services">
     <div class="inner">
-      <h2>このLPで見せる3つのポイント</h2>
-      <div class="grid">
-        <div class="card"><span class="num">1</span><h3>強みを最初に伝える</h3><p>初めて見る人が3秒で「自分に関係ある」と分かる見出しにします。</p></div>
-        <div class="card"><span class="num">2</span><h3>料金と流れを明確に</h3><p>問い合わせ前の不安を減らすため、目安料金や予約までの流れを整理します。</p></div>
-        <div class="card"><span class="num">3</span><h3>スマホで迷わせない</h3><p>電話・LINE・予約ボタンを分かりやすく置き、離脱を減らします。</p></div>
-      </div>
+      <h2>レンタルスペースで反応を作る見せ方</h2>
+      <div class="grid3"><div class="card feature"><img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=900&q=80" alt=""><span>会議</span><strong>1時間</strong><p>ビジネス利用</p></div>
+<div class="card feature"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80" alt=""><span>撮影</span><strong>設備あり</strong><p>クリエイター向け</p></div>
+<div class="card feature"><img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=900&q=80" alt=""><span>イベント</span><strong>貸切可</strong><p>用途を広げる</p></div></div>
     </div>
   </section>
   <section class="band">
-    <div class="inner grid2">
+    <div class="inner split">
+      <div>
+        <h2>初めて見る人が迷わない導線にする。</h2>
+        <p>会議、撮影、イベントなど用途別に見せて予約サイトへつなげる構成。</p>
+        <p>レンタルスペースでは、SNSやGoogleマップで興味を持った人が、料金・場所・予約方法で迷った瞬間に離脱します。ページ内で比較材料と問い合わせ先をまとめて、次の行動まで短くします。</p>
+      </div>
+      <img class="photo" src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1400&q=80" alt="レンタルスペースのページイメージ">
+    </div>
+  </section>
+  <section>
+    <div class="inner split">
+      <div>
+        <h2>ページに入れる情報</h2>
+        <div class="checklist">
+          <div>強み・選ばれる理由をファーストビューで表示</div>
+          <div>料金目安、メニュー、サービス内容を整理</div>
+          <div>口コミ・実績・写真で信頼材料を追加</div>
+          <div>LINE、電話、予約フォーム、Googleマップをまとめる</div>
+        </div>
+      </div>
       <div class="card">
-        <h2>制作プラン例</h2>
+        <h3>制作プラン例</h3>
         <p>レンタルスペース向けLP制作</p>
         <div class="price">5万円〜</div>
-        <p>文章構成、スマホ対応、問い合わせ導線、公開設定込み。写真やメニューがあれば、より実店舗に近い形に整えられます。</p>
-      </div>
-      <div class="card">
-        <h2>改善サポート例</h2>
-        <p>公開後はGoogleマップ、SNSプロフィール、予約リンクの見直しまで含めると反応が上がりやすくなります。</p>
+        <p>文章構成、スマホ対応、問い合わせ導線、公開設定込み。写真やメニューがあれば、より実店舗に近い形で作れます。</p>
       </div>
     </div>
   </section>
-  <section class="contact" id="contact">
-    <div class="inner">
-      <h2>この形で作りたい方へ</h2>
-      <p>レンタルスペースの内容に合わせて、写真・料金・メニュー・予約導線を入れ替えて制作できます。</p>
-      <div class="contact-buttons">
-        <a class="btn" href="https://line.me/R/ti/p/@015vzsdb" target="_blank" rel="noopener">LINEで相談</a>
-        <a class="btn dark" href="https://calendly.com/hatunemikudaisuki/30min" target="_blank" rel="noopener">30分相談</a>
-        <a class="btn light" href="mailto:info@morika.work">メール相談</a>
-      </div>
+  <footer class="contact-footer" id="contact">
+    <h2>予約・お問い合わせ</h2>
+    <p>Instagram、X、公式サイト、電話を押しやすく配置し、問い合わせタイミングを逃しません。</p>
+    <div class="contact-buttons">
+      <a class="primary" href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://x.com/" target="_blank" rel="noopener">X</a>
+      <a href="#" target="_blank" rel="noopener">公式サイト</a>
+      <a href="tel:0000000000">電話</a>
     </div>
-  </section>
-  <footer>株式会社MORIKA / Web導線ラボ</footer>
+  </footer>
+  <div class="fixed-cta"><a class="cta" href="#contact">空き確認</a><a class="cta secondary" href="#services">内容を見る</a></div>
 </body>
 </html>
