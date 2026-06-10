@@ -172,6 +172,19 @@
       margin-right: 5px;
     }
 
+    .category-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin: 8px 0;
+    }
+
+    .category-actions button {
+      min-height: 36px;
+      padding: 8px 10px;
+      font-size: 12px;
+    }
+
     .pill.used {
       background: #e8f5ef;
       border-color: #94c9b0;
@@ -455,6 +468,10 @@
           <p class="hint">公開後に入力すると、DM内のサンプルURLがHTTPSになります。ローカル利用中は空でOKです。</p>
 
           <label>業種</label>
+          <div class="category-actions">
+            <button id="selectAllCategoriesBtn" type="button" class="secondary">全てにチェック</button>
+            <button id="clearCategoriesBtn" type="button" class="ghost">全て外す</button>
+          </div>
           <div class="pill-list category-list" id="categoryPills"></div>
           <input id="customCategory" placeholder="業種を追加 例: 歯科, 税理士, 民泊">
           <label>最近実施した業種</label>
@@ -1378,6 +1395,16 @@ ${absoluteSampleUrl(sample.path)}
     el("linkBtn").addEventListener("click", generateSearchLinks);
     el("manualBtn").addEventListener("click", addManual);
     el("sampleBtn").addEventListener("click", addSamples);
+    el("selectAllCategoriesBtn").addEventListener("click", () => {
+      document.querySelectorAll("#categoryPills input[type='checkbox']").forEach((input) => {
+        input.checked = true;
+      });
+    });
+    el("clearCategoriesBtn").addEventListener("click", () => {
+      document.querySelectorAll("#categoryPills input[type='checkbox']").forEach((input) => {
+        input.checked = false;
+      });
+    });
     el("exportBtn").addEventListener("click", exportCsv);
     el("clearBtn").addEventListener("click", () => {
       if (confirm("保存済みの候補をすべて削除しますか？")) {
