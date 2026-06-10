@@ -68,7 +68,21 @@
       color: white;
     }
     .eyebrow { display: inline-block; padding: 7px 12px; border-radius: 999px; background: rgba(20,108,95,.92); font-weight: 950; margin-bottom: 18px; }
-    h1 { font-size: clamp(38px, 8vw, 84px); line-height: 1.02; margin: 0 0 18px; letter-spacing: 0; max-width: 930px; }
+    h1 { margin: 0 0 18px; letter-spacing: 0; max-width: 1080px; }
+    h1 .headline-main {
+      display: block;
+      font-size: clamp(38px, 5.2vw, 68px);
+      line-height: 1.06;
+      font-weight: 950;
+    }
+    h1 .headline-sub {
+      display: block;
+      margin-top: 10px;
+      font-size: clamp(27px, 3.35vw, 46px);
+      line-height: 1.18;
+      font-weight: 920;
+      color: rgba(255,255,255,.96);
+    }
     h2 { font-size: clamp(26px, 4vw, 44px); line-height: 1.16; margin: 0 0 14px; letter-spacing: 0; }
     h3 { margin: 0 0 8px; font-size: 21px; }
     p { line-height: 1.8; font-size: 16px; }
@@ -121,6 +135,8 @@
     footer { padding: 22px; background: #071f3b; color: rgba(255,255,255,.72); text-align: center; }
     @media (max-width: 900px) {
       header { min-height: auto; padding-top: 50px; }
+      h1 .headline-main { font-size: clamp(34px, 10vw, 46px); }
+      h1 .headline-sub { font-size: clamp(24px, 7vw, 32px); }
       .grid, .grid2, .contact-buttons { grid-template-columns: 1fr; }
       .nav-inner { align-items: flex-start; flex-direction: column; }
       .countdown-bar span { display: flex; margin: 8px auto 0; width: max-content; }
@@ -147,7 +163,11 @@
   <header>
     <div class="inner">
       <span class="eyebrow">小規模店舗・個人事業主向け</span>
-      <h1>成果につながるLPを、今だけ5万円で。<br>問い合わせが増えるLPを、24時間限定5万円で制作。<br>集客に強いLPを、24時間限定5万円で。</h1>
+      <h1>
+        <span class="headline-main">成果につながるLPを、今だけ5万円で。</span>
+        <span class="headline-sub">問い合わせが増えるLPを、24時間限定5万円で制作。</span>
+        <span class="headline-sub">集客に強いLPを、24時間限定5万円で。</span>
+      </h1>
       <p class="lead">GoogleマップやSNSから来た人が「料金・場所・予約方法」で迷わないWeb導線を整えます。まずは無料相談で、今の導線で改善できるポイントを確認します。</p>
       <div class="offer-box">
         <span><span class="strike">通常10万円</span> のLP制作を</span>
@@ -156,7 +176,7 @@
       </div>
       <div class="actions">
         <a class="cta green" href="https://line.me/R/ti/p/@015vzsdb" target="_blank" rel="noopener">LINEで無料相談する</a>
-        <a class="cta dark" href="https://calendly.com/morika-work/30min" target="_blank" rel="noopener">30分相談を予約</a>
+        <a class="cta dark" href="https://calendly.com/hatunemikudaisuki/30min" target="_blank" rel="noopener">30分相談を予約</a>
         <a class="cta blue" href="tel:07033403552">電話 070-3340-3552</a>
       </div>
     </div>
@@ -212,7 +232,7 @@
       <p>LPを作るべきか、HPが必要か、今の導線を見て相談できます。まずは一番使いやすい方法でご連絡ください。</p>
       <div class="contact-buttons">
         <a class="green" href="https://line.me/R/ti/p/@015vzsdb" target="_blank" rel="noopener">LINEで無料相談する</a>
-        <a class="dark" href="https://calendly.com/morika-work/30min" target="_blank" rel="noopener">30分相談を予約</a>
+        <a class="dark" href="https://calendly.com/hatunemikudaisuki/30min" target="_blank" rel="noopener">30分相談を予約</a>
         <a class="blue" href="tel:07033403552">電話 070-3340-3552</a>
         <a href="mailto:info@morika.work">メール相談</a>
       </div>
