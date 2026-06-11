@@ -39,7 +39,17 @@ function serveFile(res, filePath, options = {}) {
     }
 
     const ext = path.extname(filePath);
-    const type = ext === ".html" ? "text/html; charset=utf-8" : "application/octet-stream";
+    const types = {
+      ".html": "text/html; charset=utf-8",
+      ".css": "text/css; charset=utf-8",
+      ".js": "text/javascript; charset=utf-8",
+      ".png": "image/png",
+      ".jpg": "image/jpeg",
+      ".jpeg": "image/jpeg",
+      ".webp": "image/webp",
+      ".svg": "image/svg+xml"
+    };
+    const type = types[ext] || "application/octet-stream";
     res.writeHead(200, {
       "Content-Type": type,
       "Cache-Control": "no-store",
