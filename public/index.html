@@ -1411,11 +1411,25 @@ ${absoluteSampleUrl(sample.path)}
     }
 
     function exportCsv() {
-      const headers = ["name", "category", "score", "status", "rating", "reviews", "phone", "instagram", "xUrl", "officialUrl", "officialLine", "website", "mapsUrl", "address", "reasons", "memo", "source", "createdAt", "updatedAt"];
-      const rows = [headers, ...prospects.map((p) => headers.map((h) => {
-        const value = h === "reasons" ? p.reasons.join(" / ") : p[h];
-        return String(value ?? "");
-      }))];
+      const headers = [
+        "会社名",
+        "郵便番号付き住所",
+        "DM送付",
+        "コメント欄",
+        "DM文章（1行目）",
+        "イメージに近いサンプルLP/HP"
+      ];
+      const rows = [headers, ...prospects.map((p) => {
+        const sample = sampleForCategory(p.category);
+        return [
+          p.name || "",
+          p.address || "",
+          p.status && p.status !== "未連絡" ? "送付済" : "未送付",
+          p.memo || "",
+          firstLine(buildDiagnosisDm(p)),
+          `${sample.label} ${absoluteSampleUrl(sample.path)}`
+        ];
+      })];
       const csv = rows.map((row) => row.map(csvCell).join(",")).join("\n");
       const blob = new Blob(["\ufeff" + csv], { type: "text/csv;charset=utf-8" });
       const url = URL.createObjectURL(blob);
@@ -1428,6 +1442,13 @@ ${absoluteSampleUrl(sample.path)}
 
     function csvCell(value) {
       return `"${String(value).replaceAll('"', '""')}"`;
+    }
+
+    function firstLine(value) {
+      return String(value || "")
+        .split(/\r?\n/)
+        .map((line) => line.trim())
+        .find(Boolean) || "";
     }
 
     function googleSearchUrl(q) {
