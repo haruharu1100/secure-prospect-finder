@@ -589,6 +589,7 @@ Web導線改善を行っている株式会社MORIKAです。
                 <input id="searchBox" placeholder="店舗名・住所・メモで検索">
                 <select id="statusFilter">
                   <option value="all">全ステータス</option>
+                  <option value="web-unconfirmed">Web未確認</option>
                   <option value="未連絡">未連絡</option>
                   <option value="診断送付">診断送付</option>
                   <option value="ラフ提案">ラフ提案</option>
@@ -1031,7 +1032,7 @@ Web導線改善を行っている株式会社MORIKAです。
       return prospects.filter((p) => {
         const text = [p.name, p.address, p.memo, p.category, p.instagram, p.xUrl, p.officialUrl, p.officialLine, p.phone, p.reasons.join(" ")].join(" ").toLowerCase();
         return (!q || text.includes(q))
-          && (status === "all" || p.status === status)
+          && (status === "all" || (status === "web-unconfirmed" ? !p.website : p.status === status))
           && (pr === "all" || priority(p.score) === pr);
       });
     }
