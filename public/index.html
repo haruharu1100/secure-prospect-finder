@@ -1426,8 +1426,8 @@ ${absoluteSampleUrl(sample.path)}
           p.address || "",
           p.status && p.status !== "未連絡" ? "送付済" : "未送付",
           p.memo || "",
-          firstLine(buildDiagnosisDm(p)),
-          `${sample.label} ${absoluteSampleUrl(sample.path)}`
+          buildDiagnosisDm(p),
+          absoluteSampleUrl(sample.path)
         ];
       })];
       const csv = rows.map((row) => row.map(csvCell).join(",")).join("\n");
@@ -1442,13 +1442,6 @@ ${absoluteSampleUrl(sample.path)}
 
     function csvCell(value) {
       return `"${String(value).replaceAll('"', '""')}"`;
-    }
-
-    function firstLine(value) {
-      return String(value || "")
-        .split(/\r?\n/)
-        .map((line) => line.trim())
-        .find(Boolean) || "";
     }
 
     function googleSearchUrl(q) {
