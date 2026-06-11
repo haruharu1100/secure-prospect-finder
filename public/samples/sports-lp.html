@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>体験申込につながるスポーツLP｜株式会社MORIKA サンプル</title>
+  <meta name="description" content="スポーツ向けのLP制作サンプルです。レッスン内容・料金・体験申込を見せる導線">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", sans-serif; color: #141c2f; background: #f7f8fb; }
+    a { color: inherit; }
+    nav { position: fixed; inset: 0 0 auto; z-index: 5; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 24px; background: rgba(255,255,255,.92); border-bottom: 1px solid rgba(0,0,0,.1); backdrop-filter: blur(10px); }
+    nav strong { font-size: 18px; } nav a, .cta { text-decoration: none; border-radius: 6px; font-weight: 950; }
+    nav a, .cta { background: #e45b22; color: white; padding: 12px 16px; }
+    header { min-height: 88vh; display: grid; align-items: end; padding: 110px 28px 44px; color: white; background: linear-gradient(rgba(0,0,0,.1), rgba(0,0,0,.76)), url("https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=1800&q=80") center/cover; }
+    .hero, .inner { width: min(1120px, 100%); margin: 0 auto; }
+    .eyebrow { display: inline-block; margin-bottom: 14px; color: #fff; background: rgba(0,0,0,.34); border: 1px solid rgba(255,255,255,.25); padding: 7px 12px; border-radius: 999px; font-weight: 950; }
+    h1 { max-width: 960px; font-size: clamp(38px, 7.4vw, 84px); line-height: 1.01; margin: 0 0 18px; letter-spacing: 0; text-shadow: 0 4px 0 rgba(0,0,0,.5), 0 14px 30px rgba(0,0,0,.48); }
+    h2 { font-size: clamp(28px, 4vw, 46px); line-height: 1.14; margin: 0 0 16px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 22px; }
+    p { font-size: 16px; line-height: 1.85; }
+    .lead { max-width: 780px; font-size: 19px; font-weight: 750; color: rgba(255,255,255,.95); }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 24px; }
+    .cta.secondary { background: white; color: #e45b22; }
+    section { padding: 70px 24px; }
+    .band { background: #edf1f8; }
+    .split { display: grid; grid-template-columns: .95fr 1.05fr; gap: 34px; align-items: center; }
+    .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .card { background: white; border: 1px solid rgba(0,0,0,.12); border-radius: 8px; padding: 22px; box-shadow: 0 16px 38px rgba(16,24,40,.08); }
+    .feature { padding: 0; overflow: hidden; }
+    .feature img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+    .feature span { display: block; margin: 18px 18px 4px; font-weight: 950; color: #e45b22; }
+    .feature strong { display: block; margin: 0 18px; font-size: 28px; color: #e45b22; }
+    .feature p { margin: 8px 18px 20px; }
+    .photo { width: 100%; border-radius: 8px; aspect-ratio: 4/3; object-fit: cover; box-shadow: 0 18px 44px rgba(0,0,0,.14); }
+    .checklist { display: grid; gap: 12px; }
+    .checklist div { background: white; border-left: 5px solid #e45b22; border-radius: 8px; padding: 16px 18px; font-weight: 800; }
+    .price { font-size: 36px; color: #e45b22; font-weight: 950; margin: 8px 0; }
+    .contact-footer { padding: 58px 24px 76px; background: #141c2f; color: white; text-align: center; }
+    .contact-footer h2 { color: white; }
+    .contact-buttons { width: min(820px, 100%); margin: 22px auto 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .contact-buttons a { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; border-radius: 6px; background: white; color: #141c2f; text-decoration: none; font-weight: 950; }
+    .contact-buttons a.primary { background: #e45b22; color: white; }
+    .fixed-cta { position: sticky; bottom: 0; z-index: 4; display: flex; justify-content: center; gap: 10px; padding: 10px; background: rgba(255,255,255,.94); border-top: 1px solid rgba(0,0,0,.12); }
+    @media (max-width: 860px) { nav { padding: 10px 14px; } .grid3, .split, .contact-buttons { grid-template-columns: 1fr; } section { padding: 52px 18px; } .fixed-cta { flex-direction: column; } .cta { width: 100%; justify-content: center; } }
+  </style>
+</head>
+<body>
+  <nav><strong>スポーツ Sample</strong><a href="#contact">体験申込</a></nav>
+  <header>
+    <div class="hero">
+      <span class="eyebrow">スポーツ向け / 予約・問い合わせ特化LP</span>
+      <h1>体験申込と入会につながるスポーツLP。</h1>
+      <p class="lead">レッスン内容・料金・体験申込を見せる導線。スクール、ジム、チーム、イベントの魅力を、体験申込、入会相談、問い合わせまで自然につなげる構成です。</p>
+      <div class="actions"><a class="cta" href="#contact">体験申込</a><a class="cta secondary" href="#services">内容を見る</a></div>
+    </div>
+  </header>
+  <section id="services">
+    <div class="inner">
+      <h2>スポーツで反応を作る見せ方</h2>
+      <div class="grid3"><div class="card feature"><img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=900&q=80" alt=""><span>体験レッスン</span><strong>受付中</strong><p>初めての参加ハードルを下げる</p></div>
+<div class="card feature"><img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=900&q=80" alt=""><span>クラス紹介</span><strong>目的別</strong><p>初心者・キッズ・競技者で入口を分ける</p></div>
+<div class="card feature"><img src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?auto=format&fit=crop&w=900&q=80" alt=""><span>料金/日程</span><strong>明確表示</strong><p>問い合わせ前の迷いを減らす</p></div></div>
+    </div>
+  </section>
+  <section class="band">
+    <div class="inner split">
+      <div>
+        <h2>初めて見る人が迷わない導線にする。</h2>
+        <p>スクール、ジム、チーム、イベントの魅力を伝え、体験申込や入会相談へつなげる構成。</p>
+        <p>スポーツでは、SNSやGoogleマップで興味を持った人が、料金・場所・予約方法で迷った瞬間に離脱します。ページ内で比較材料と問い合わせ先をまとめて、次の行動まで短くします。</p>
+      </div>
+      <img class="photo" src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=1400&q=80" alt="スポーツのページイメージ">
+    </div>
+  </section>
+  <section>
+    <div class="inner split">
+      <div>
+        <h2>ページに入れる情報</h2>
+        <div class="checklist">
+          <div>強み・選ばれる理由をファーストビューで表示</div>
+          <div>料金目安、メニュー、サービス内容を整理</div>
+          <div>口コミ・実績・写真で信頼材料を追加</div>
+          <div>LINE、電話、予約フォーム、Googleマップをまとめる</div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>制作プラン例</h3>
+        <p>スポーツ向けLP制作</p>
+        <div class="price">5万円〜</div>
+        <p>文章構成、スマホ対応、問い合わせ導線、公開設定込み。写真やメニューがあれば、より実店舗に近い形で作れます。</p>
+      </div>
+    </div>
+  </section>
+  <footer class="contact-footer" id="contact">
+    <h2>予約・お問い合わせ</h2>
+    <p>Instagram、X、公式サイト、電話を押しやすく配置し、問い合わせタイミングを逃しません。</p>
+    <div class="contact-buttons">
+      <a class="primary" href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://x.com/" target="_blank" rel="noopener">X</a>
+      <a href="#" target="_blank" rel="noopener">公式サイト</a>
+      <a href="tel:0000000000">電話</a>
+    </div>
+  </footer>
+  <div class="fixed-cta"><a class="cta" href="#contact">体験申込</a><a class="cta secondary" href="#services">内容を見る</a></div>
+</body>
+</html>

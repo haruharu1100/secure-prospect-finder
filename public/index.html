@@ -675,7 +675,11 @@
       "音楽教室",
       "ペットサロン",
       "着物レンタル",
-      "整体スクール"
+      "整体スクール",
+      "汎用",
+      "農業",
+      "スポーツ",
+      "小売"
     ];
     const stateKey = "web_prospect_finder_v1";
     const categoryUsageKey = "web_prospect_category_usage_v1";
@@ -1194,7 +1198,11 @@
       "音楽教室": { type: "LP", path: "samples/music-school-lp.html", label: "体験レッスンにつながる音楽教室LP" },
       "ペットサロン": { type: "LP", path: "samples/pet-salon-lp.html", label: "予約につながるペットサロンLP" },
       "着物レンタル": { type: "LP", path: "samples/kimono-rental-lp.html", label: "予約につながる着物レンタルLP" },
-      "整体スクール": { type: "LP", path: "samples/seitai-school-lp.html", label: "説明会予約につながる整体スクールLP" }
+      "整体スクール": { type: "LP", path: "samples/seitai-school-lp.html", label: "説明会予約につながる整体スクールLP" },
+      "汎用": { type: "LP", path: "samples/general-lp.html", label: "問い合わせにつながる汎用LP" },
+      "農業": { type: "HP", path: "samples/agriculture-hp.html", label: "直販・問い合わせにつながる農業HP" },
+      "スポーツ": { type: "LP", path: "samples/sports-lp.html", label: "体験申込につながるスポーツLP" },
+      "小売": { type: "LP", path: "samples/retail-lp.html", label: "来店・購入につながる小売LP" }
     };
 
     function sampleForCategory(category) {
@@ -1248,6 +1256,30 @@
           conversion: "体験申込・問い合わせ",
           proof: "レッスン内容、料金、講師、通いやすさ、体験の流れ",
           offer: "体験申込につながるLP"
+        };
+      }
+      if (/農業/.test(cat)) {
+        return {
+          audience: "購入先や取引先を比較している人",
+          conversion: "直販購入・法人取引相談・体験問い合わせ",
+          proof: "生産者の想い、作物のこだわり、旬の情報、購入方法、取引実績",
+          offer: "購入・取引相談につながるHP"
+        };
+      }
+      if (/スポーツ/.test(cat)) {
+        return {
+          audience: "体験先や入会先を探している人",
+          conversion: "体験申込・入会相談",
+          proof: "クラス内容、料金、日程、講師/コーチ、初心者でも安心な流れ",
+          offer: "体験申込につながるLP"
+        };
+      }
+      if (/小売/.test(cat)) {
+        return {
+          audience: "商品や店舗を比較している人",
+          conversion: "来店・購入・取り置き相談",
+          proof: "おすすめ商品、価格帯、店舗のこだわり、営業時間、アクセス",
+          offer: "来店・購入につながるLP"
         };
       }
       return {

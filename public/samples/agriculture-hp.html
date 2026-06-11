@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>直販・問い合わせにつながる農業HP｜株式会社MORIKA サンプル</title>
+  <meta name="description" content="農業向けのHP制作サンプルです。作物の魅力・購入方法・体験/法人相談を整理する導線">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", sans-serif; color: #1f2b1d; background: #fbfbf3; }
+    a { color: inherit; }
+    nav { position: fixed; inset: 0 0 auto; z-index: 5; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 24px; background: rgba(255,255,255,.92); border-bottom: 1px solid rgba(0,0,0,.1); backdrop-filter: blur(10px); }
+    nav strong { font-size: 18px; } nav a, .cta { text-decoration: none; border-radius: 6px; font-weight: 950; }
+    nav a, .cta { background: #4f7d32; color: white; padding: 12px 16px; }
+    header { min-height: 88vh; display: grid; align-items: end; padding: 110px 28px 44px; color: white; background: linear-gradient(rgba(0,0,0,.1), rgba(0,0,0,.76)), url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1800&q=80") center/cover; }
+    .hero, .inner { width: min(1120px, 100%); margin: 0 auto; }
+    .eyebrow { display: inline-block; margin-bottom: 14px; color: #fff; background: rgba(0,0,0,.34); border: 1px solid rgba(255,255,255,.25); padding: 7px 12px; border-radius: 999px; font-weight: 950; }
+    h1 { max-width: 960px; font-size: clamp(38px, 7.4vw, 84px); line-height: 1.01; margin: 0 0 18px; letter-spacing: 0; text-shadow: 0 4px 0 rgba(0,0,0,.5), 0 14px 30px rgba(0,0,0,.48); }
+    h2 { font-size: clamp(28px, 4vw, 46px); line-height: 1.14; margin: 0 0 16px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 22px; }
+    p { font-size: 16px; line-height: 1.85; }
+    .lead { max-width: 780px; font-size: 19px; font-weight: 750; color: rgba(255,255,255,.95); }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 24px; }
+    .cta.secondary { background: white; color: #4f7d32; }
+    section { padding: 70px 24px; }
+    .band { background: #eef3df; }
+    .split { display: grid; grid-template-columns: .95fr 1.05fr; gap: 34px; align-items: center; }
+    .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .card { background: white; border: 1px solid rgba(0,0,0,.12); border-radius: 8px; padding: 22px; box-shadow: 0 16px 38px rgba(16,24,40,.08); }
+    .feature { padding: 0; overflow: hidden; }
+    .feature img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+    .feature span { display: block; margin: 18px 18px 4px; font-weight: 950; color: #4f7d32; }
+    .feature strong { display: block; margin: 0 18px; font-size: 28px; color: #4f7d32; }
+    .feature p { margin: 8px 18px 20px; }
+    .photo { width: 100%; border-radius: 8px; aspect-ratio: 4/3; object-fit: cover; box-shadow: 0 18px 44px rgba(0,0,0,.14); }
+    .checklist { display: grid; gap: 12px; }
+    .checklist div { background: white; border-left: 5px solid #4f7d32; border-radius: 8px; padding: 16px 18px; font-weight: 800; }
+    .price { font-size: 36px; color: #4f7d32; font-weight: 950; margin: 8px 0; }
+    .contact-footer { padding: 58px 24px 76px; background: #1f2b1d; color: white; text-align: center; }
+    .contact-footer h2 { color: white; }
+    .contact-buttons { width: min(820px, 100%); margin: 22px auto 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .contact-buttons a { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; border-radius: 6px; background: white; color: #1f2b1d; text-decoration: none; font-weight: 950; }
+    .contact-buttons a.primary { background: #4f7d32; color: white; }
+    .fixed-cta { position: sticky; bottom: 0; z-index: 4; display: flex; justify-content: center; gap: 10px; padding: 10px; background: rgba(255,255,255,.94); border-top: 1px solid rgba(0,0,0,.12); }
+    @media (max-width: 860px) { nav { padding: 10px 14px; } .grid3, .split, .contact-buttons { grid-template-columns: 1fr; } section { padding: 52px 18px; } .fixed-cta { flex-direction: column; } .cta { width: 100%; justify-content: center; } }
+  </style>
+</head>
+<body>
+  <nav><strong>農業 Sample</strong><a href="#contact">相談する</a></nav>
+  <header>
+    <div class="hero">
+      <span class="eyebrow">農業向け / 信頼型ホームページ</span>
+      <h1>作物のこだわりを、購入・取引相談につなげる農業HP。</h1>
+      <p class="lead">作物の魅力・購入方法・体験/法人相談を整理する導線。生産者の想い、栽培のこだわり、旬の情報、購入方法、法人取引の相談導線を整理します。</p>
+      <div class="actions"><a class="cta" href="#contact">購入・取引相談</a><a class="cta secondary" href="#services">内容を見る</a></div>
+    </div>
+  </header>
+  <section id="services">
+    <div class="inner">
+      <h2>農業で反応を作る見せ方</h2>
+      <div class="grid3"><div class="card feature"><img src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=900&q=80" alt=""><span>旬の作物</span><strong>季節販売</strong><p>収穫時期と魅力を分かりやすく</p></div>
+<div class="card feature"><img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=900&q=80" alt=""><span>直販/配送</span><strong>相談可</strong><p>購入方法を迷わせない</p></div>
+<div class="card feature"><img src="https://images.unsplash.com/photo-1492496913980-501348b61469?auto=format&fit=crop&w=900&q=80" alt=""><span>法人取引</span><strong>問い合わせ</strong><p>飲食店や小売からの相談へ</p></div></div>
+    </div>
+  </section>
+  <section class="band">
+    <div class="inner split">
+      <div>
+        <h2>初めて見る人が迷わない導線にする。</h2>
+        <p>農産物のこだわり、収穫時期、購入方法、取引相談を分かりやすく見せる構成。</p>
+        <p>農業では、SNSやGoogleマップで興味を持った人が、料金・場所・予約方法で迷った瞬間に離脱します。ページ内で比較材料と問い合わせ先をまとめて、次の行動まで短くします。</p>
+      </div>
+      <img class="photo" src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=1400&q=80" alt="農業のページイメージ">
+    </div>
+  </section>
+  <section>
+    <div class="inner split">
+      <div>
+        <h2>ページに入れる情報</h2>
+        <div class="checklist">
+          <div>強み・選ばれる理由をファーストビューで表示</div>
+          <div>料金目安、メニュー、サービス内容を整理</div>
+          <div>口コミ・実績・写真で信頼材料を追加</div>
+          <div>LINE、電話、予約フォーム、Googleマップをまとめる</div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>制作プラン例</h3>
+        <p>農業向けHP制作</p>
+        <div class="price">5万円〜</div>
+        <p>文章構成、スマホ対応、問い合わせ導線、公開設定込み。写真やメニューがあれば、より実店舗に近い形で作れます。</p>
+      </div>
+    </div>
+  </section>
+  <footer class="contact-footer" id="contact">
+    <h2>予約・お問い合わせ</h2>
+    <p>Instagram、X、公式サイト、電話を押しやすく配置し、問い合わせタイミングを逃しません。</p>
+    <div class="contact-buttons">
+      <a class="primary" href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://x.com/" target="_blank" rel="noopener">X</a>
+      <a href="#" target="_blank" rel="noopener">公式サイト</a>
+      <a href="tel:0000000000">電話</a>
+    </div>
+  </footer>
+  <div class="fixed-cta"><a class="cta" href="#contact">購入・取引相談</a><a class="cta secondary" href="#services">内容を見る</a></div>
+</body>
+</html>
